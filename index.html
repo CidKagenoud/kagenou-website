@@ -32,7 +32,7 @@
             position: relative;
         }
         
-        /* Додаємо сірі плями на фоні */
+        /* Змінюємо сірі плями на сині бульбашки */
         body::before {
             content: '';
             position: fixed;
@@ -40,21 +40,21 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 20% 30%, rgba(60, 60, 60, 0.15) 0%, transparent 30%),
-                        radial-gradient(circle at 80% 20%, rgba(60, 60, 60, 0.1) 0%, transparent 20%),
-                        radial-gradient(circle at 40% 70%, rgba(70, 70, 70, 0.12) 0%, transparent 40%),
-                        radial-gradient(circle at 70% 90%, rgba(50, 50, 50, 0.15) 0%, transparent 30%),
-                        radial-gradient(circle at 10% 60%, rgba(80, 80, 80, 0.1) 0%, transparent 25%),
-                        radial-gradient(circle at 90% 40%, rgba(60, 60, 60, 0.08) 0%, transparent 30%);
+            background: radial-gradient(circle at 20% 30%, rgba(13, 110, 253, 0.08) 0%, transparent 30%),
+                        radial-gradient(circle at 80% 20%, rgba(13, 110, 253, 0.05) 0%, transparent 20%),
+                        radial-gradient(circle at 40% 70%, rgba(13, 110, 253, 0.07) 0%, transparent 40%),
+                        radial-gradient(circle at 70% 90%, rgba(13, 110, 253, 0.09) 0%, transparent 30%),
+                        radial-gradient(circle at 10% 60%, rgba(13, 110, 253, 0.06) 0%, transparent 25%),
+                        radial-gradient(circle at 90% 40%, rgba(13, 110, 253, 0.04) 0%, transparent 30%);
             pointer-events: none;
             z-index: 0;
         }
         
-        /* Додаємо анімовані плями */
+        /* Оновлюємо плаваючі бульбашки на сині */
         .floating-blob {
             position: fixed;
             border-radius: 50%;
-            background: rgba(100, 100, 100, 0.05);
+            background: rgba(13, 110, 253, 0.1);
             filter: blur(40px);
             z-index: 0;
             animation: float 20s infinite linear;
@@ -66,6 +66,7 @@
             top: 10%;
             left: -100px;
             animation-duration: 30s;
+            background: radial-gradient(circle at center, rgba(13, 110, 253, 0.15), rgba(13, 110, 253, 0.05));
         }
         
         .blob-2 {
@@ -74,6 +75,7 @@
             top: 60%;
             right: -50px;
             animation-duration: 25s;
+            background: radial-gradient(circle at center, rgba(13, 110, 253, 0.12), rgba(13, 110, 253, 0.04));
         }
         
         .blob-3 {
@@ -82,23 +84,43 @@
             bottom: 10%;
             left: 30%;
             animation-duration: 35s;
+            background: radial-gradient(circle at center, rgba(13, 110, 253, 0.1), rgba(13, 110, 253, 0.03));
         }
         
+        .blob-4 {
+            width: 180px;
+            height: 180px;
+            top: 40%;
+            left: 60%;
+            animation-duration: 28s;
+            background: radial-gradient(circle at center, rgba(13, 110, 253, 0.08), rgba(13, 110, 253, 0.02));
+        }
+        
+        .blob-5 {
+            width: 150px;
+            height: 150px;
+            top: 20%;
+            left: 70%;
+            animation-duration: 33s;
+            background: radial-gradient(circle at center, rgba(13, 110, 253, 0.09), rgba(13, 110, 253, 0.03));
+        }
+        
+        /* Зміна анімації для більш "плавучого" вигляду */
         @keyframes float {
             0% {
-                transform: translate(0, 0);
+                transform: translate(0, 0) scale(1);
             }
             25% {
-                transform: translate(50px, 50px);
+                transform: translate(50px, 50px) scale(1.05);
             }
             50% {
-                transform: translate(0, 100px);
+                transform: translate(0, 100px) scale(1);
             }
             75% {
-                transform: translate(-50px, 50px);
+                transform: translate(-50px, 50px) scale(0.95);
             }
             100% {
-                transform: translate(0, 0);
+                transform: translate(0, 0) scale(1);
             }
         }
         
@@ -456,10 +478,12 @@
     </style>
 </head>
 <body>
-    <!-- Додаємо плаваючі плями на фоні -->
+    <!-- Додаємо плаваючі бульбашки на фоні -->
     <div class="floating-blob blob-1"></div>
     <div class="floating-blob blob-2"></div>
     <div class="floating-blob blob-3"></div>
+    <div class="floating-blob blob-4"></div>
+    <div class="floating-blob blob-5"></div>
     
     <header>
         <div class="logo">
