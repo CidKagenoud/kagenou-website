@@ -15,7 +15,7 @@
         
         header {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             padding: 20px 50px;
             background-color: rgba(0, 0, 0, 0.7);
@@ -63,31 +63,6 @@
         
         nav a:hover {
             color: #0d6efd;
-        }
-        
-        .cta-buttons {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .btn {
-            padding: 10px 15px;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-        
-        .btn-secondary {
-            color: #fff;
-        }
-        
-        .btn-primary {
-            background-color: #0d6efd;
-            color: #fff;
-        }
-        
-        .btn-primary:hover {
-            background-color: #0b5ed7;
         }
         
         main {
@@ -143,30 +118,6 @@
             box-shadow: 0 0 30px rgba(13, 110, 253, 0.3);
         }
         
-        .buttons-container {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .small-buttons {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        
-        .small-btn {
-            padding: 8px 15px;
-            border-radius: 5px;
-            text-decoration: none;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: #fff;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
         .scroll-indicator {
             position: absolute;
             bottom: 30px;
@@ -195,53 +146,23 @@
                 text-align: center;
                 margin-bottom: 40px;
             }
-            
-            .buttons-container {
-                justify-content: center;
-            }
-            
-            .small-buttons {
-                justify-content: center;
-            }
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="logo">
-            <div class="logo-icon">MF</div>
-            <div class="logo-text">MyFriends</div>
-        </div>
-        
         <nav>
             <ul>
                 <li><a href="#">Головна</a></li>
-                <li><a href="#">Можливості</a></li>
-                <li><a href="#">Про нас</a></li>
             </ul>
         </nav>
-        
-        <div class="cta-buttons">
-            <a href="#" class="btn btn-secondary">Telegram</a>
-            <a href="#" class="btn btn-primary">Компоненти</a>
-        </div>
     </header>
     
     <main>
         <div class="main-content">
             <div class="text-section">
                 <h1>Привіт, друже <span class="highlight">#1</span><br>з революційною дружбою</h1>
-                <p>Якщо ти зайшов на цей сайт, то ти номер 1 друг у світі. Дякую, бро!</p>
-                
-                <div class="buttons-container">
-                    <a href="#" class="btn btn-primary">Стати другом ⟶</a>
-                    <a href="#" class="btn btn-secondary">Компоненти</a>
-                </div>
-                
-                <div class="small-buttons">
-                    <a href="#" class="small-btn">📱 Мобільна версія</a>
-                    <a href="#" class="small-btn">🔧 Налаштування</a>
-                </div>
+                <p>Якщо ти зайшов на цей сайт, то ти номер 1 друг у світі.</p>
             </div>
             
             <div class="image-section">
