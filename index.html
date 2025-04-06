@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -98,6 +98,21 @@
             align-items: center;
             padding: 0 20px;
             text-align: center;
+            position: relative;
+        }
+        
+        .main-content {
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .text-section {
+            flex: 1;
+            text-align: left;
+            padding-right: 40px;
         }
         
         h1 {
@@ -105,10 +120,51 @@
             margin-bottom: 20px;
         }
         
+        .highlight {
+            color: #0d6efd;
+        }
+        
         p {
             font-size: 1.2rem;
             max-width: 600px;
             margin-bottom: 30px;
+        }
+        
+        .image-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .app-preview {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(13, 110, 253, 0.3);
+        }
+        
+        .buttons-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .small-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .small-btn {
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
         
         .scroll-indicator {
@@ -128,6 +184,26 @@
                 transform: translateY(-10px);
             }
         }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .text-section {
+                padding-right: 0;
+                text-align: center;
+                margin-bottom: 40px;
+            }
+            
+            .buttons-container {
+                justify-content: center;
+            }
+            
+            .small-buttons {
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -139,22 +215,39 @@
         
         <nav>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Features</a></li>
-                <li><a href="#">About</a></li>
+                <li><a href="#">Головна</a></li>
+                <li><a href="#">Можливості</a></li>
+                <li><a href="#">Про нас</a></li>
             </ul>
         </nav>
         
         <div class="cta-buttons">
-            <a href="#" class="btn btn-secondary">Github</a>
-            <a href="#" class="btn btn-primary">Download</a>
+            <a href="#" class="btn btn-secondary">Telegram</a>
+            <a href="#" class="btn btn-primary">Компоненти</a>
         </div>
     </header>
     
     <main>
-        <h1>Connect With Your Friends</h1>
-        <p>A modern platform to stay connected with the people who matter most. Simple, secure, and stylish.</p>
-        <a href="#" class="btn btn-primary">Get Started</a>
+        <div class="main-content">
+            <div class="text-section">
+                <h1>Привіт, друже <span class="highlight">#1</span><br>з революційною дружбою</h1>
+                <p>Якщо ти зайшов на цей сайт, то ти номер 1 друг у світі. Дякую, бро!</p>
+                
+                <div class="buttons-container">
+                    <a href="#" class="btn btn-primary">Стати другом ⟶</a>
+                    <a href="#" class="btn btn-secondary">Компоненти</a>
+                </div>
+                
+                <div class="small-buttons">
+                    <a href="#" class="small-btn">📱 Мобільна версія</a>
+                    <a href="#" class="small-btn">🔧 Налаштування</a>
+                </div>
+            </div>
+            
+            <div class="image-section">
+                <img src="/api/placeholder/500/400" alt="Інтерфейс додатку" class="app-preview">
+            </div>
+        </div>
         
         <div class="scroll-indicator">↓</div>
     </main>
