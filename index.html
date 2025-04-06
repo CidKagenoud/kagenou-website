@@ -49,8 +49,8 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            z-index: 201; /* Збільшуємо z-index щоб був вище за мобільне меню */
-            text-decoration: none; /* Видаляємо підкреслення для посилання */
+            z-index: 201;
+            text-decoration: none;
         }
         
         .logo-icon {
@@ -73,32 +73,45 @@
             overflow: hidden;
         }
         
+        /* Новий стиль для переливання тексту */
         .logo-text {
             font-family: 'Orbitron', sans-serif;
             font-size: 20px;
             font-weight: 700;
-            color: var(--primary-color);
             letter-spacing: 1px;
             text-transform: uppercase;
-            background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+            position: relative;
+            background: linear-gradient(
+                90deg, 
+                #0d6efd 0%, 
+                #83a4ff 20%, 
+                #4169e1 40%, 
+                #1e90ff 60%, 
+                #00bfff 80%, 
+                #0d6efd 100%
+            );
+            background-size: 200% auto;
+            color: transparent;
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: glow 2s ease-in-out infinite alternate;
-            position: relative;
+            animation: shimmer 4s linear infinite;
+            text-shadow: 0 0 10px rgba(13, 110, 253, 0.3);
         }
         
-        /* Змінюємо анімацію блиску, щоб видалити фіолетові полоси */
-        @keyframes glow {
-            from {
+        @keyframes shimmer {
+            0% {
+                background-position: 0% center;
                 text-shadow: 0 0 5px rgba(13, 110, 253, 0.2);
             }
-            to {
-                text-shadow: 0 0 15px rgba(13, 110, 253, 0.5);
+            50% {
+                text-shadow: 0 0 20px rgba(13, 110, 253, 0.6);
+            }
+            100% {
+                background-position: 200% center;
+                text-shadow: 0 0 5px rgba(13, 110, 253, 0.2);
             }
         }
-        
-        /* Видалення анімації shine, яка створює полоси */
         
         .menu-toggle {
             display: none;
@@ -262,7 +275,7 @@
                 align-items: center;
                 transition: all 0.5s ease;
                 z-index: 150;
-                padding-top: 80px; /* Відступ зверху для уникнення накладання на логотип */
+                padding-top: 80px;
             }
             
             nav.active {
@@ -290,28 +303,28 @@
             
             .main-content {
                 flex-direction: column;
-                margin-top: 60px; /* Збільшуємо відступ зверху */
-                padding-bottom: 60px; /* Додаємо відступ знизу для прокрутки */
+                margin-top: 60px;
+                padding-bottom: 60px;
             }
             
             .text-section {
                 padding-right: 0;
                 text-align: center;
                 margin-bottom: 40px;
-                order: 1; /* Змінюємо порядок - текст тепер перший */
+                order: 1;
             }
             
             .image-section {
-                order: 2; /* Змінюємо порядок - зображення тепер друге */
+                order: 2;
                 margin-top: 20px;
                 width: 100%;
-                padding-bottom: 40px; /* Додаємо відступ щоб було видно при прокрутці */
+                padding-bottom: 40px;
             }
             
             .app-preview {
-                width: 100%; /* Встановлюємо фіксовану ширину */
-                max-height: 300px; /* Обмежуємо висоту */
-                display: block; /* Переконуємось, що SVG відображається */
+                width: 100%;
+                max-height: 300px;
+                display: block;
             }
             
             .logo-text {
@@ -325,13 +338,13 @@
             }
             
             main {
-                padding-top: 70px; /* Зменшуємо відступ зверху для мобільних пристроїв */
-                padding-bottom: 40px; /* Збільшуємо відступ знизу для прокрутки */
-                justify-content: flex-start; /* Починаємо контент зверху, а не по центру */
+                padding-top: 70px;
+                padding-bottom: 40px;
+                justify-content: flex-start;
             }
             
             .scroll-indicator {
-                bottom: 10px; /* Підіймаємо індикатор прокрутки вище */
+                bottom: 10px;
             }
         }
         
@@ -346,12 +359,11 @@
             
             .app-preview {
                 max-width: 100%;
-                width: 100%; /* Фіксуємо ширину SVG */
-                height: auto; /* Дозволяємо висоті адаптуватись */
-                min-height: 250px; /* Мінімальна висота для видимості на маленьких екранах */
+                width: 100%;
+                height: auto;
+                min-height: 250px;
             }
             
-            /* Збільшуємо відступ для мобільного меню */
             nav ul {
                 gap: 25px;
                 margin-top: 20px;
