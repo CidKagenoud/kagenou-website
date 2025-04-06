@@ -29,6 +29,77 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Додаємо сірі плями на фоні */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(60, 60, 60, 0.15) 0%, transparent 30%),
+                        radial-gradient(circle at 80% 20%, rgba(60, 60, 60, 0.1) 0%, transparent 20%),
+                        radial-gradient(circle at 40% 70%, rgba(70, 70, 70, 0.12) 0%, transparent 40%),
+                        radial-gradient(circle at 70% 90%, rgba(50, 50, 50, 0.15) 0%, transparent 30%),
+                        radial-gradient(circle at 10% 60%, rgba(80, 80, 80, 0.1) 0%, transparent 25%),
+                        radial-gradient(circle at 90% 40%, rgba(60, 60, 60, 0.08) 0%, transparent 30%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        /* Додаємо анімовані плями */
+        .floating-blob {
+            position: fixed;
+            border-radius: 50%;
+            background: rgba(100, 100, 100, 0.05);
+            filter: blur(40px);
+            z-index: 0;
+            animation: float 20s infinite linear;
+        }
+        
+        .blob-1 {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: -100px;
+            animation-duration: 30s;
+        }
+        
+        .blob-2 {
+            width: 250px;
+            height: 250px;
+            top: 60%;
+            right: -50px;
+            animation-duration: 25s;
+        }
+        
+        .blob-3 {
+            width: 200px;
+            height: 200px;
+            bottom: 10%;
+            left: 30%;
+            animation-duration: 35s;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translate(0, 0);
+            }
+            25% {
+                transform: translate(50px, 50px);
+            }
+            50% {
+                transform: translate(0, 100px);
+            }
+            75% {
+                transform: translate(-50px, 50px);
+            }
+            100% {
+                transform: translate(0, 0);
+            }
         }
         
         header {
@@ -137,24 +208,31 @@
             flex-grow: 1;
         }
         
+        /* Змінюємо стиль для центрування кнопок */
         nav ul {
             display: flex;
             list-style: none;
             gap: 30px;
             padding: 0;
             margin: 0;
+            justify-content: center; /* Центруємо кнопки по горизонталі */
         }
         
+        /* Додаємо більше стилю для кнопок */
         nav a {
             color: var(--text-color);
             text-decoration: none;
-            transition: color 0.3s;
+            transition: all 0.3s;
             position: relative;
             font-size: 1rem;
+            padding: 8px 16px;
+            border-radius: 4px;
+            display: inline-block;
         }
         
         nav a:hover {
             color: var(--primary-color);
+            background-color: rgba(13, 110, 253, 0.1);
         }
         
         nav a::after {
@@ -162,14 +240,15 @@
             position: absolute;
             width: 0;
             height: 2px;
-            bottom: -5px;
-            left: 0;
+            bottom: 0;
+            left: 50%;
             background-color: var(--primary-color);
-            transition: width 0.3s;
+            transition: all 0.3s;
+            transform: translateX(-50%);
         }
         
         nav a:hover::after {
-            width: 100%;
+            width: 80%;
         }
         
         main {
@@ -181,6 +260,7 @@
             padding: 80px 20px 20px;
             text-align: center;
             position: relative;
+            z-index: 1;
         }
         
         .main-content {
@@ -376,6 +456,11 @@
     </style>
 </head>
 <body>
+    <!-- Додаємо плаваючі плями на фоні -->
+    <div class="floating-blob blob-1"></div>
+    <div class="floating-blob blob-2"></div>
+    <div class="floating-blob blob-3"></div>
+    
     <header>
         <div class="logo">
             <div class="logo-icon">ZP</div>
