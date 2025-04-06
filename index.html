@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyFriends</title>
+    <title>Zypherion</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap');
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
@@ -45,8 +47,25 @@
         }
         
         .logo-text {
+            font-family: 'Orbitron', sans-serif;
             font-size: 20px;
-            font-weight: 600;
+            font-weight: 700;
+            color: #0d6efd;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #0d6efd, #83a4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px rgba(13, 110, 253, 0.2);
+            }
+            to {
+                text-shadow: 0 0 15px rgba(13, 110, 253, 0.5);
+            }
         }
         
         nav {
@@ -160,8 +179,8 @@
 <body>
     <header>
         <div class="logo">
-            <div class="logo-icon">MF</div>
-            <div class="logo-text">MyFriends</div>
+            <div class="logo-icon">ZP</div>
+            <div class="logo-text">Zypherion</div>
         </div>
         
         <nav>
