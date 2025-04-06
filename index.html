@@ -15,7 +15,7 @@
         
         header {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             padding: 20px 50px;
             background-color: rgba(0, 0, 0, 0.7);
@@ -49,10 +49,18 @@
             font-weight: 600;
         }
         
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-grow: 1;
+        }
+        
         nav ul {
             display: flex;
             list-style: none;
             gap: 20px;
+            padding: 0;
+            margin: 0;
         }
         
         nav a {
@@ -151,17 +159,24 @@
 </head>
 <body>
     <header>
+        <div class="logo">
+            <div class="logo-icon">MF</div>
+            <div class="logo-text">MyFriends</div>
+        </div>
+        
         <nav>
             <ul>
                 <li><a href="#">Головна</a></li>
             </ul>
         </nav>
+        
+        <div style="width: 150px;"><!-- Пустий блок для балансу шапки --></div>
     </header>
     
     <main>
         <div class="main-content">
             <div class="text-section">
-                <h1>Привіт, друже <span class="highlight">#1</span><br>з революційною дружбою</h1>
+                <h1>Привіт, друже <span class="highlight">#1</span></h1>
                 <p>Якщо ти зайшов на цей сайт, то ти номер 1 друг у світі.</p>
             </div>
             
