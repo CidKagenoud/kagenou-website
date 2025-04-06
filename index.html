@@ -9,31 +9,46 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap');
         
+        :root {
+            --primary-color: #0d6efd;
+            --primary-light: #83a4ff;
+            --text-color: #fff;
+            --bg-color: #000;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #000;
-            color: #fff;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
         }
         
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 50px;
-            background-color: rgba(0, 0, 0, 0.7);
+            padding: 15px 5%;
+            background-color: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             position: fixed;
             width: 100%;
-            box-sizing: border-box;
             z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
         
         .logo {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
         }
         
         .logo-icon {
@@ -42,7 +57,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #0d6efd;
+            background-color: var(--primary-color);
             color: white;
             font-family: 'Orbitron', sans-serif;
             font-weight: bold;
@@ -60,11 +75,12 @@
             font-family: 'Orbitron', sans-serif;
             font-size: 20px;
             font-weight: 700;
-            color: #0d6efd;
+            color: var(--primary-color);
             letter-spacing: 1px;
             text-transform: uppercase;
-            background: linear-gradient(90deg, #0d6efd, #83a4ff);
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: glow 2s ease-in-out infinite alternate;
             position: relative;
@@ -107,6 +123,23 @@
             }
         }
         
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+        }
+        
+        .menu-toggle span {
+            width: 100%;
+            height: 3px;
+            background-color: var(--text-color);
+            border-radius: 3px;
+            transition: all 0.3s ease-in-out;
+        }
+        
         nav {
             display: flex;
             justify-content: center;
@@ -116,23 +149,23 @@
         nav ul {
             display: flex;
             list-style: none;
-            gap: 30px; /* Трохи збільшив відступ між пунктами меню */
+            gap: 30px;
             padding: 0;
             margin: 0;
         }
         
         nav a {
-            color: #fff;
+            color: var(--text-color);
             text-decoration: none;
             transition: color 0.3s;
             position: relative;
+            font-size: 1rem;
         }
         
         nav a:hover {
-            color: #0d6efd;
+            color: var(--primary-color);
         }
         
-        /* Додаємо підкреслення для активних посилань */
         nav a::after {
             content: '';
             position: absolute;
@@ -140,7 +173,7 @@
             height: 2px;
             bottom: -5px;
             left: 0;
-            background-color: #0d6efd;
+            background-color: var(--primary-color);
             transition: width 0.3s;
         }
         
@@ -154,7 +187,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 0 20px;
+            padding: 80px 20px 20px;
             text-align: center;
             position: relative;
         }
@@ -165,6 +198,7 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
+            margin-top: 40px;
         }
         
         .text-section {
@@ -174,18 +208,20 @@
         }
         
         h1 {
-            font-size: 3rem;
+            font-size: clamp(2rem, 5vw, 3rem);
             margin-bottom: 20px;
+            line-height: 1.2;
         }
         
         .highlight {
-            color: #0d6efd;
+            color: var(--primary-color);
         }
         
         p {
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 2vw, 1.2rem);
             max-width: 600px;
             margin-bottom: 30px;
+            line-height: 1.6;
         }
         
         .image-section {
@@ -205,6 +241,7 @@
             position: absolute;
             bottom: 30px;
             animation: bounce 2s infinite;
+            font-size: 24px;
         }
         
         @keyframes bounce {
@@ -219,15 +256,93 @@
             }
         }
         
+        @media (max-width: 992px) {
+            .main-content {
+                padding: 0 20px;
+            }
+        }
+        
         @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+            }
+            
+            .menu-toggle {
+                display: flex;
+                z-index: 200;
+            }
+            
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: rgba(0, 0, 0, 0.95);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: all 0.5s ease;
+                z-index: 150;
+            }
+            
+            nav.active {
+                right: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 40px;
+            }
+            
+            nav a {
+                font-size: 1.2rem;
+            }
+            
             .main-content {
                 flex-direction: column;
+                margin-top: 20px;
             }
             
             .text-section {
                 padding-right: 0;
                 text-align: center;
                 margin-bottom: 40px;
+                order: 2;
+            }
+            
+            .image-section {
+                order: 1;
+                margin-bottom: 30px;
+            }
+            
+            .app-preview {
+                max-width: 90%;
+            }
+            
+            .logo-text {
+                font-size: 18px;
+            }
+            
+            .logo-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            p {
+                font-size: 1rem;
+            }
+            
+            .app-preview {
+                max-width: 100%;
             }
         }
     </style>
@@ -241,14 +356,18 @@
             </div>
         </div>
         
-        <nav>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        
+        <nav id="mobileNav">
             <ul>
                 <li><a href="index.html">Головна</a></li>
                 <li><a href="mid.html">Мід</a></li>
             </ul>
         </nav>
-        
-        <div style="width: 150px;"><!-- Пустий блок для балансу шапки --></div>
     </header>
     
     <main>
@@ -296,11 +415,32 @@
                   
                   <!-- Футуристичні лінії та елементи інтерфейсу -->
                   <g id="interface-elements">
+                    <!-- Можна додати додаткові елементи -->
+                  </g>
                 </svg>
             </div>
         </div>
         
         <div class="scroll-indicator">↓</div>
     </main>
+
+    <script>
+        // JavaScript для мобільного меню
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('mobileNav').classList.toggle('active');
+            const spans = this.querySelectorAll('span');
+            
+            // Анімація іконки меню
+            if (document.getElementById('mobileNav').classList.contains('active')) {
+                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
