@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мід - Zypherion</title>
+    <!-- Favicon для вкладки браузера -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='10' fill='%230d6efd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Orbitron, sans-serif' font-weight='bold' font-size='50' fill='white'>ZP</text></svg>" type="image/svg+xml">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            box-sizing: border-box;
+            z-index: 100;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #0d6efd;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            font-size: 20px;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(13, 110, 253, 0.5);
+        }
+        
+        .logo-text-container {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #0d6efd;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #0d6efd, #83a4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
+            position: relative;
+        }
+        
+        .logo-text::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.8), 
+                transparent
+            );
+            animation: shine 3s linear infinite;
+        }
+        
+        @keyframes shine {
+            0% {
+                left: -100%;
+            }
+            20% {
+                left: 100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px rgba(13, 110, 253, 0.2);
+            }
+            to {
+                text-shadow: 0 0 15px rgba(13, 110, 253, 0.5);
+            }
+        }
+        
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-grow: 1;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            padding: 0;
+            margin: 0;
+        }
+        
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: #0d6efd;
+        }
+        
+        /* Додаємо підкреслення для активних посилань */
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #0d6efd;
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* На цій сторінці активна вкладка "Мід" */
+        nav a[href="mid.html"]::after {
+            width: 100%;
+        }
+        
+        main {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 120px 20px 60px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .mid-content {
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .highlight {
+            color: #0d6efd;
+        }
+        
+        p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .join-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(90deg, #0d6efd, #4285f4);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            box-shadow: 0 0 20px rgba(13, 110, 253, 0.4);
+            transition: all 0.3s;
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .join-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.3), 
+                transparent
+            );
+            animation: shine 3s linear infinite;
+        }
+        
+        .join-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(13, 110, 253, 0.7);
+        }
+        
+        .mid-image {
+            max-width: 100%;
+            height: auto;
+            margin: 40px 0;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(13, 110, 253, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            p {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <div class="logo-icon">ZP</div>
+            <div class="logo-text-container">
+                <div class="logo-text">Zypherion</div>
+            </div>
+        </div>
+        
+        <nav>
+            <ul>
+                <li><a href="index.html">Головна</a></li>
+                <li><a href="mid.html">Мід</a></li>
+            </ul>
+        </nav>
+        
+        <div style="width: 150px;"><!-- Пустий блок для балансу шапки --></div>
+    </header>
+    
+    <main>
+        <div class="mid-content">
+            <h1>Приєднуйся до нашого <span class="highlight">міду</span></h1>
+            
+            <p>Давно хотів поговорити зі своїм другом? У нас є чудове місце для спілкування та розваг. Приєднуйся до нашої спільноти!</p>
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 300" class="mid-image">
+                <!-- Футуристичний фон для міду -->
+                <rect width="500" height="300" fill="#0a0e17" />
+                
+                <!-- Елементи оформлення -->
+                <circle cx="250" cy="150" r="60" fill="url(#glow-gradient)" opacity="0.8" />
+                <defs>
+                    <radialGradient id="glow-gradient" cx="50%" cy="50%" r="50%" fx="25%" fy="25%">
+                        <stop offset="0%" stop-color="#0d6efd" stop-opacity="0.9" />
+                        <stop offset="70%" stop-color="#83a4ff" stop-opacity="0.6" />
+                        <stop offset="100%" stop-color="#001840" stop-opacity="0.1" />
+                    </radialGradient>
+                </defs>
+                
+                <!-- Символічне зображення мережевого з'єднання -->
+                <g fill="none" stroke="#0d6efd" stroke-width="2">
+                    <line x1="100" y1="100" x2="200" y2="150" />
+                    <line x1="300" y1="200" x2="200" y2="150" />
+                    <line x1="400" y1="100" x2="300" y2="150" />
+                    <line x1="300" y1="150" x2="250" y2="150" />
+                    <line x1="250" y1="150" x2="200" y2="220" />
+                    <line x1="250" y1="150" x2="150" y2="220" />
+                    <line x1="250" y1="150" x2="350" y2="220" />
+                </g>
+                
+                <!-- Вузли мережі -->
+                <circle cx="100" cy="100" r="8" fill="#0d6efd" />
+                <circle cx="300" cy="200" r="8" fill="#0d6efd" />
+                <circle cx="400" cy="100" r="8" fill="#0d6efd" />
+                <circle cx="200" cy="220" r="8" fill="#0d6efd" />
+                <circle cx="150" cy="220" r="8" fill="#0d6efd" />
+                <circle cx="350" cy="220" r="8" fill="#0d6efd" />
+                
+                <!-- Анімаційні маркери -->
+                <circle cx="250" cy="150" r="12" fill="#ffffff" opacity="0.7" />
+            </svg>
+            
+            <p>Наш мід - це місце, де ми можемо обговорювати ігри, ділитися цікавими новинами, та просто весело проводити час разом.</p>
+            
+            <a href="https://discord.gg/ВАШ_КОД" class="join-button">Приєднатися до міду</a>
+        </div>
+    </main>
+</body>
+</html>
