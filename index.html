@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zypherion</title>
-    <!-- Додаємо favicon для вкладки браузера -->
+    <!-- Favicon для вкладки браузера -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='10' fill='%230d6efd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Orbitron, sans-serif' font-weight='bold' font-size='50' fill='white'>ZP</text></svg>" type="image/svg+xml">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap');
@@ -116,7 +116,7 @@
         nav ul {
             display: flex;
             list-style: none;
-            gap: 20px;
+            gap: 30px; /* Трохи збільшив відступ між пунктами меню */
             padding: 0;
             margin: 0;
         }
@@ -125,58 +125,27 @@
             color: #fff;
             text-decoration: none;
             transition: color 0.3s;
+            position: relative;
         }
         
         nav a:hover {
             color: #0d6efd;
         }
         
-        /* Стиль для посилання на мід */
-        .mid-link {
-            display: inline-block;
-            padding: 8px 15px;
-            background-color: #0d6efd;
-            border-radius: 20px;
-            color: white;
-            font-weight: 500;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .mid-link:hover {
-            background-color: #0b5ed7;
-            transform: translateY(-2px);
-            box-shadow: 0 0 15px rgba(13, 110, 253, 0.5);
-            color: white;
-        }
-        
-        .mid-link::after {
+        /* Додаємо підкреслення для активних посилань */
+        nav a::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.3), 
-                transparent
-            );
-            animation: mid-shine 2s linear infinite;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #0d6efd;
+            transition: width 0.3s;
         }
         
-        @keyframes mid-shine {
-            0% {
-                left: -100%;
-            }
-            20% {
-                left: 100%;
-            }
-            100% {
-                left: 100%;
-            }
+        nav a:hover::after {
+            width: 100%;
         }
         
         main {
@@ -274,8 +243,8 @@
         
         <nav>
             <ul>
-                <li><a href="#">Головна</a></li>
-                <li><a href="#" class="mid-link">Мід</a></li>
+                <li><a href="index.html">Головна</a></li>
+                <li><a href="mid.html">Мід</a></li>
             </ul>
         </nav>
         
