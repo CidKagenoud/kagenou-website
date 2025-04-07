@@ -126,8 +126,7 @@
         
         header {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            justify-content: center;
             padding: 15px 5%;
             background-color: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
@@ -144,6 +143,8 @@
             gap: 10px;
             z-index: 201;
             text-decoration: none;
+            position: absolute;
+            left: 5%;
         }
         
         .logo-icon {
@@ -206,6 +207,34 @@
             }
         }
         
+        /* Новий стиль для навігації, як на скріншоті */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 10px;
+            padding: 0;
+            margin: 0;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: 500;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s;
+        }
+        
+        nav a.active {
+            background-color: #0d6efd;
+            box-shadow: 0 0 10px rgba(13, 110, 253, 0.5);
+        }
+        
+        nav a:hover:not(.active) {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
         .menu-toggle {
             display: none;
             flex-direction: column;
@@ -214,6 +243,8 @@
             height: 21px;
             cursor: pointer;
             z-index: 200;
+            position: absolute;
+            right: 5%;
         }
         
         .menu-toggle span {
@@ -222,60 +253,6 @@
             background-color: var(--text-color);
             border-radius: 3px;
             transition: all 0.3s ease-in-out;
-        }
-        
-        nav {
-            display: flex;
-            justify-content: center;
-            flex-grow: 1;
-        }
-        
-        /* Центруємо кнопки */
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-            padding: 0;
-            margin: 0;
-            justify-content: center;
-        }
-        
-        /* Оновлений стиль для кнопок навігації */
-        nav a {
-            color: var(--text-color);
-            text-decoration: none;
-            transition: all 0.3s;
-            position: relative;
-            font-size: 1rem;
-            padding: 8px 16px;
-            border-radius: 4px;
-            display: inline-block;
-        }
-        
-        nav a:hover {
-            color: var(--primary-color);
-            background-color: rgba(13, 110, 253, 0.1);
-        }
-        
-        nav a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 50%;
-            background-color: var(--primary-color);
-            transition: all 0.3s;
-            transform: translateX(-50%);
-        }
-        
-        nav a:hover::after {
-            width: 80%;
-        }
-        
-        /* На цій сторінці активна вкладка "Мід" */
-        nav a[href="mid.html"]::after {
-            width: 80%;
         }
         
         main {
@@ -500,18 +477,18 @@
             </div>
         </div>
         
+        <nav>
+            <ul>
+                <li><a href="index.html" class="active">Головна</a></li>
+                <li><a href="mid.html">Мід</a></li>
+            </ul>
+        </nav>
+        
         <div class="menu-toggle" id="menuToggle">
             <span></span>
             <span></span>
             <span></span>
         </div>
-        
-        <nav id="mobileNav">
-            <ul>
-                <li><a href="index.html">Головна</a></li>
-                <li><a href="mid.html">Мід</a></li>
-            </ul>
-        </nav>
     </header>
     
     <main>
@@ -566,11 +543,11 @@
     <script>
         // JavaScript для мобільного меню
         document.getElementById('menuToggle').addEventListener('click', function() {
-            document.getElementById('mobileNav').classList.toggle('active');
+            document.querySelector('nav').classList.toggle('active');
             const spans = this.querySelectorAll('span');
             
             // Анімація іконки меню
-            if (document.getElementById('mobileNav').classList.contains('active')) {
+            if (document.querySelector('nav').classList.contains('active')) {
                 spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
                 spans[1].style.opacity = '0';
                 spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
@@ -584,7 +561,7 @@
         // Закриваємо меню після кліку на пункт меню
         document.querySelectorAll('nav a').forEach(item => {
             item.addEventListener('click', function() {
-                document.getElementById('mobileNav').classList.remove('active');
+                document.querySelector('nav').classList.remove('active');
                 const spans = document.getElementById('menuToggle').querySelectorAll('span');
                 spans[0].style.transform = 'none';
                 spans[1].style.opacity = '1';
