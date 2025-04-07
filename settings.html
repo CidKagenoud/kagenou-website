@@ -333,6 +333,7 @@
             margin-bottom: 20px;
             font-family: 'Orbitron', sans-serif;
             color: var(--primary-light);
+            cursor: pointer;
         }
         
         .section-title .icon {
@@ -344,6 +345,28 @@
             justify-content: center;
             background-color: var(--blob-color);
             border-radius: 6px;
+        }
+        
+        /* Додана іконка для згортання/розгортання */
+        .section-title .toggle-icon {
+            margin-left: auto;
+            font-size: 16px;
+            transition: transform 0.3s ease;
+        }
+        
+        .section-title.collapsed .toggle-icon {
+            transform: rotate(-90deg);
+        }
+        
+        /* Контент секції, який можна згортати/розгортати */
+        .section-content {
+            overflow: hidden;
+            max-height: 1000px; /* Початкове значення, більше ніж потрібно */
+            transition: max-height 0.5s ease;
+        }
+        
+        .section-content.collapsed {
+            max-height: 0;
         }
         
         .setting-item {
@@ -647,7 +670,7 @@
         }
     </style>
 </head>
-<body>
+<body class="theme-blue">
     <!-- Фонові елементи -->
     <div class="floating-blob blob-1"></div>
     <div class="floating-blob blob-2"></div>
@@ -688,34 +711,37 @@
             </div>
             
             <div class="settings-section">
-                <div class="section-title">
+                <div class="section-title" id="appearanceTitle">
                     <div class="icon">🎨</div>
                     <h2>Зовнішній вигляд</h2>
+                    <div class="toggle-icon">▲</div>
                 </div>
                 
-                <div class="setting-item">
-                    <div class="setting-info">
-                        <div class="setting-label">Тема оформлення</div>
-                        <div class="setting-description">Виберіть колірну схему для сайту</div>
-                    </div>
-                    
-                    <div class="theme-selector">
-                        <div class="theme-option theme-blue" id="blueTheme">
-                            <div class="theme-preview"></div>
-                            <div class="theme-info">Синя</div>
-                            <div class="theme-checkmark">✓</div>
+                <div class="section-content" id="appearanceContent">
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-label">Тема оформлення</div>
+                            <div class="setting-description">Виберіть колірну схему для сайту</div>
                         </div>
                         
-                        <div class="theme-option theme-purple" id="purpleTheme">
-                            <div class="theme-preview"></div>
-                            <div class="theme-info">Фіолетова</div>
-                            <div class="theme-checkmark">✓</div>
-                        </div>
-                        
-                        <div class="theme-option theme-turquoise" id="turquoiseTheme">
-                            <div class="theme-preview"></div>
-                            <div class="theme-info">Бірюзова</div>
-                            <div class="theme-checkmark">✓</div>
+                        <div class="theme-selector">
+                            <div class="theme-option theme-blue active" id="blueTheme">
+                                <div class="theme-preview"></div>
+                                <div class="theme-info">Синя</div>
+                                <div class="theme-checkmark">✓</div>
+                            </div>
+                            
+                            <div class="theme-option theme-purple" id="purpleTheme">
+                                <div class="theme-preview"></div>
+                                <div class="theme-info">Фіолетова</div>
+                                <div class="theme-checkmark">✓</div>
+                            </div>
+                            
+                            <div class="theme-option theme-turquoise" id="turquoiseTheme">
+                                <div class="theme-preview"></div>
+                                <div class="theme-info">Бірюзова</div>
+                                <div class="theme-checkmark">✓</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -734,9 +760,14 @@
     <script>
         // Завантаження збереженої теми при завантаженні сторінки
         document.addEventListener('DOMContentLoaded', function() {
+            // Встановлюємо синю тему за замовчуванням
+            if (!localStorage.getItem('zypherionTheme')) {
+                localStorage.setItem('zypherionTheme', 'blue');
+            }
+            
             loadSavedTheme();
             
-            // Відсікаємо стилізацію превью тем від основних стилів сайту
+            // Встановлюємо обробники для вибору теми
             document.querySelectorAll('.theme-option').forEach(option => {
                 option.addEventListener('click', function() {
                     document.querySelectorAll('.theme-option').forEach(opt => {
@@ -744,6 +775,13 @@
                     });
                     this.classList.add('active');
                 });
+            });
+
+            // Додаємо обробник для згортання/розгортання розділів
+            document.getElementById('appearanceTitle').addEventListener('click', function() {
+                this.classList.toggle('collapsed');
+                const content = document.getElementById('appearanceContent');
+                content.classList.toggle('collapsed');
             });
         });
         
