@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Налаштування - Zypherion</title>
+    <!-- Favicon для вкладки браузера -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='10' fill='%230d6efd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Orbitron, sans-serif' font-weight='bold' font-size='50' fill='white'>ZP</text></svg>" type="image/svg+xml">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap');
+        
+        :root {
+            --primary-color: #0d6efd;
+            --primary-light: #83a4ff;
+            --text-color: #fff;
+            --bg-color: #000;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Змінюємо сірі плями на сині бульбашки */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(13, 110, 253, 0.08) 0%, transparent 30%),
+                        radial-gradient(circle at 80% 20%, rgba(13, 110, 253, 0.05) 0%, transparent 20%),
+                        radial-gradient(circle at 40% 70%, rgba(13, 110, 253, 0.07) 0%, transparent 40%),
+                        radial-gradient(circle at 70% 90%, rgba(13, 110, 253, 0.09) 0%, transparent 30%),
+                        radial-gradient(circle at 10% 60%, rgba(13, 110, 253, 0.06) 0%, transparent 25%),
+                        radial-gradient(circle at 90% 40%, rgba(13, 110, 253, 0.04) 0%, transparent 30%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        /* Оновлюємо плаваючі бульбашки на сині */
+        .floating-blob {
+            position: fixed;
+            border-radius: 50%;
+            background: rgba(13, 110, 253, 0.1);
+            filter: blur(40px);
+            z-index: 0;
+            animation: float 20s infinite linear;
+        }
+        
+        .blob-1 {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: -100px;
+            animation-duration: 30s;
+            background: radial-gradient(circle at center, rgba(13, 110, 253, 0.15), rgba(13, 110, 253, 0.05));
+        }
+        
+        .blob-2 {
+            width: 250px;
+            height: 250px;
+            top: 60%;
+            right: -50px;
+            animation-duration: 25s;
+            background: radial-gradient(circle at center, rgba(13, 110, 253, 0.12), rgba(13, 110, 253, 0.04));
+        }
+        
+        .blob-3 {
+            width: 200px;
+            height: 200px;
+            bottom: 10%;
+            left: 30%;
+            animation-duration: 35s;
+            background: radial-gradient(circle at center, rgba(13, 110, 253, 0.1), rgba(13, 110, 253, 0.03));
+        }
+        
+        .blob-4 {
+            width: 180px;
+            height: 180px;
+            top: 40%;
+            left: 60%;
+            animation-duration: 28s;
+            background: radial-gradient(circle at center, rgba(13, 110, 253, 0.08), rgba(13, 110, 253, 0.02));
+        }
+        
+        .blob-5 {
+            width: 150px;
+            height: 150px;
+            top: 20%;
+            left: 70%;
+            animation-duration: 33s;
+            background: radial-gradient(circle at center, rgba(13, 110, 253, 0.09), rgba(13, 110, 253, 0.03));
+        }
+        
+        /* Зміна анімації для більш "плавучого" вигляду */
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            25% {
+                transform: translate(50px, 50px) scale(1.05);
+            }
+            50% {
+                transform: translate(0, 100px) scale(1);
+            }
+            75% {
+                transform: translate(-50px, 50px) scale(0.95);
+            }
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Модифікуємо логотип, щоб він був в лівому куті */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 201;
+            text-decoration: none;
+            margin-right: auto; /* Притискаємо до лівого краю */
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary-color);
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            font-size: 20px;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(13, 110, 253, 0.5);
+        }
+        
+        .logo-text-container {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Новий стиль для переливання тексту */
+        .logo-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: relative;
+            background: linear-gradient(
+                90deg, 
+                #0d6efd 0%, 
+                #83a4ff 20%, 
+                #4169e1 40%, 
+                #1e90ff 60%, 
+                #00bfff 80%, 
+                #0d6efd 100%
+            );
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 4s linear infinite;
+            text-shadow: 0 0 10px rgba(13, 110, 253, 0.3);
+        }
+        
+        @keyframes shimmer {
+            0% {
+                background-position: 0% center;
+                text-shadow: 0 0 5px rgba(13, 110, 253, 0.2);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(13, 110, 253, 0.6);
+            }
+            100% {
+                background-position: 200% center;
+                text-shadow: 0 0 5px rgba(13, 110, 253, 0.2);
+            }
+        }
+        
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 200;
+        }
+        
+        .menu-toggle span {
+            width: 100%;
+            height: 3px;
+            background-color: var(--text-color);
+            border-radius: 3px;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        /* Центруємо навігацію */
+        nav {
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            left: 0;
+            right: 0;
+            z-index: 90;
+        }
+        
+        /* Змінюємо стиль для центрування кнопок */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            padding: 0;
+            margin: 0;
+            justify-content: center; /* Центруємо кнопки по горизонталі */
+        }
+        
+        /* Додаємо стиль для контейнеру заокруглених кнопок */
+        .nav-container {
+            display: flex;
+            gap: 10px;
+            background-color: rgba(13, 110, 253, 0.1);
+            border-radius: 30px;
+            padding: 6px;
+            box-shadow: 0 0 15px rgba(13, 110, 253, 0.2);
+        }
+        
+        /* Стиль для заокруглених кнопок */
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: all 0.3s;
+            position: relative;
+            font-size: 1rem;
+            padding: 8px 16px;
+            border-radius: 20px; /* Сильно заокруглені краї */
+            display: inline-block;
+            background-color: transparent;
+        }
+        
+        nav a:hover {
+            color: white;
+            background-color: rgba(13, 110, 253, 0.3);
+            box-shadow: 0 0 10px rgba(13, 110, 253, 0.3);
+        }
+        
+        nav a.active {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 0 15px rgba(13, 110, 253, 0.5);
+        }
+        
+        main {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 120px 20px 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .settings-container {
+            max-width: 800px;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(13, 110, 253, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        .settings-header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .settings-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(90deg, #0d6efd, #83a4ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .settings-header p {
+            color: #aaa;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .settings-section {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(13, 110, 253, 0.2);
+        }
+        
+        .settings-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .section-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary-light);
+        }
+        
+        .section-title .icon {
+            margin-right: 10px;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(13, 110, 253, 0.2);
+            border-radius: 6px;
+        }
+        
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s;
+        }
+        
+        .setting-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 10px rgba(13, 110, 253, 0.2);
+        }
+        
+        .setting-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .setting-label {
+            font-weight: 500;
+        }
+        
+        .setting-description {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-top: 5px;
+        }
+        
+        /* Кастомні перемикачі */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.2);
+            transition: .4s;
+            border-radius: 30px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(13, 110, 253, 0.5);
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(30px);
+        }
+        
+        /* Кастомний селект */
+        .setting-select {
+            position: relative;
+            width: 150px;
+        }
+        
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 100%;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 20px;
+            background-color: rgba(13, 110, 253, 0.2);
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        select:hover {
+            background-color: rgba(13, 110, 253, 0.3);
+        }
+        
+        select:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(13, 110, 253, 0.5);
+        }
+        
+        .select-arrow {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+        
+        /* Різні стилі слайдера для різних тем */
+        .theme-slider {
+            width: 100%;
+            -webkit-appearance: none;
+            height: 6px;
+            border-radius: 3px;
+            background: linear-gradient(to right, #0d6efd, #83a4ff);
+            outline: none;
+        }
+        
+        .theme-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: white;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(13, 110, 253, 0.5);
+        }
+        
+        .theme-slider::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: white;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(13, 110, 253, 0.5);
+        }
+        
+        /* Індикатор теми */
+        .theme-indicator {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-left: 15px;
+            background: linear-gradient(135deg, #0d6efd, #83a4ff);
+            box-shadow: 0 0 10px rgba(13, 110, 253, 0.5);
+        }
+        
+        .save-button {
+            display: block;
+            margin: 20px auto 0;
+            padding: 12px 30px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 0 15px rgba(13, 110, 253, 0.3);
+        }
+        
+        .save-button:hover {
+            background-color: #0b5ed7;
+            box-shadow: 0 0 20px rgba(13, 110, 253, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        .save-button:active {
+            transform: translateY(0);
+        }
+        
+        /* Анімація збереження */
+        @keyframes save-pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(13, 110, 253, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(13, 110, 253, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(13, 110, 253, 0);
+            }
+        }
+        
+        /* Адаптивність */
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+                justify-content: space-between;
+            }
+            
+            .menu-toggle {
+                display: flex;
+            }
+            
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: rgba(0, 0, 0, 0.95);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                transition: all 0.5s ease;
+                z-index: 150;
+                padding-top: 80px;
+            }
+            
+            nav.active {
+                right: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 40px;
+                width: 100%;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                background-color: transparent;
+                box-shadow: none;
+                width: 100%;
+            }
+            
+            nav li {
+                width: 100%;
+                text-align: center;
+            }
+            
+            nav a {
+                font-size: 1.2rem;
+                display: block;
+                padding: 10px 0;
+                width: 100%;
+                border-radius: 20px;
+            }
+            
+            .settings-container {
+                padding: 20px;
+            }
+            
+            .settings-header h1 {
+                font-size: 2rem;
+            }
+            
+            .setting-item {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 15px;
+            }
+            
+            .setting-item .setting-control {
+                margin-top: 15px;
+                align-self: flex-end;
+                width: 100%;
+                display: flex;
+                justify-content: flex-end;
+            }
+            
+            .setting-select {
+                width: 100%;
+                max-width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Додаємо плаваючі бульбашки на фоні -->
+    <div class="floating-blob blob-1"></div>
+    <div class="floating-blob blob-2"></div>
+    <div class="floating-blob blob-3"></div>
+    <div class="floating-blob blob-4"></div>
+    <div class="floating-blob blob-5"></div>
+    
+    <header>
+        <a href="index.html" class="logo">
+            <div class="logo-icon">ZP</div>
+            <div class="logo-text-container">
+                <div class="logo-text">Zypherion</div>
+            </div>
+        </a>
+        
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        
+        <nav id="mobileNav">
+            <ul>
+                <li>
+                    <div class="nav-container">
+                        <a href="index.html">Головна</a>
+                        <a href="mid.html">Мід</a>
+                        <a href="settings.html" class="active">Налаштування</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="settings-container">
+            <div class="settings-header">
+                <h1>Налаштування</h1>
+                <p>Налаштуйте Zypherion під свої потреби</p>
+            </div>
+            
+            <div class="settings-section">
+                <div class="section-title">
+                    <div class="icon">🎨</div>
+                    <h2>Зовнішній вигляд</h2>
+                </div>
+                
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-label">Темна тема</div>
+                        <div class="setting-description">Увімкнути або вимкнути темну тему</div>
+                    </div>
+                    <div class="setting-control">
+                        <label class="switch">
+                            <input type="checkbox" id="darkTheme" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-label">Анімації</div>
+                        <div class="setting-description">Увімкнути або вимкнути анімації інтерфейсу</div>
+                    </div>
+                    <div class="setting-control">
+                        <label class="switch">
+                            <input type="checkbox" id="animations" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-label">Основний колір</div>
+                        <div class="setting-description">Налаштуйте основний колір інтерфейсу</div>
+                    </div>
+                    <div class="setting-control" style="display: flex; align-items: center;">
+                        <input type="range" min="0" max="100" value="50" class="theme-slider" id="themeSlider">
+                        <div class="theme-indicator" id="themeIndicator"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <div class="section-title">
+                    <div class="icon">🔔</div>
+                    <h2>Сповіщення</h2>
+                </div>
+                
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-label">Пуш-сповіщення</div>
+                        <div class="setting-description">Отримувати сповіщення про важливі події</div>
+                    </div>
+                    <div class="setting-control">
+                        <label class="switch">
+                            <input type="checkbox" id="pushNotifications">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-label">Звукові сповіщення</div>
+                        <div class="setting-description">Звукове супроводження сповіщень</div>
+                    </div>
+                    <div class="setting-control">
+                        <label class="switch">
+                            <input type="checkbox" id="soundNotifications">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-label">Частота сповіщень</div>
+                        <div class="setting-description">Як часто отримувати сповіщення</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="setting-select">
+                            <select id="notificationFrequency">
+                                <option value="all">Всі</option>
+                                <option value="important" selected>Важливі</option>
+                                <option value="minimal">Мінімальні</option>
+                                <option value="none">Немає</option>
+                            </select>
+                            <div class="select-arrow">▼</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <div class="section-title">
+                    <div class="icon">🔒</div>
+                    <h2>Конфіденційність</h2>
+                </div>
+                
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-label">Двофакторна автентифікація</div>
+                        <div class="setting-description">Підвищений захист облікового запису</div>
+                    </div>
+                    <div class="setting-control">
+                        <label class="switch">
+                            <input type="checkbox" id="twoFactorAuth">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-label">Збір аналітики</div>
+                        <div class="setting-description">Дозволити збір анонімних даних для покращення сервісу</div>
+                    </div>
+                    <div class="setting-control">
+                        <label class="switch">
+                            <input type="checkbox" id="analytics" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-label">Видимість профілю</div>
+                        <div class="setting-description">Хто може бачити ваш профіль</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="setting-select">
+                            <select id="profileVisibility">
+                                <option value="public">Публічний</option>
+                                <option value="friends" selected>Тільки друзі</option>
+                                <option value="private">Приватний</option>
+                            </select>
+                            <div class="select-arrow">▼</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="save-button" id="saveSettings">Зберегти зміни</button>
+        </div>
+    </main>
+    
+    <script>
+        // JavaScript для мобільного меню
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('mobileNav').classList.toggle('active');
+            const spans = this.querySelectorAll('span');
+            
+            // Анімація іконки меню
+            if (document.getElementById('mobileNav').classList.contains('active')) {
+                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                spans[1].style.opacity = '0';
