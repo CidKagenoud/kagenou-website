@@ -1,584 +1,131 @@
-:root {
-    --primary-color: #0d6efd;
-    --primary-light: #83a4ff;
-    --text-color: #fff;
-    --bg-color: #000;
-    --gradient-start: #0d6efd;
-    --gradient-mid1: #83a4ff;
-    --gradient-mid2: #4169e1;
-    --gradient-mid3: #1e90ff;
-    --gradient-mid4: #00bfff;
-    --gradient-end: #0d6efd;
+/* Стилі для бірюзової теми (які відсутні у вашому CSS) */
+body.theme-turquoise {
+    --primary-color: #1abc9c;
+    --primary-light: #48c9b0;
+    --gradient-start: #1abc9c;
+    --gradient-mid1: #48c9b0;
+    --gradient-mid2: #16a085;
+    --gradient-mid3: #1abc9c;
+    --gradient-mid4: #76d7c4;
+    --gradient-end: #1abc9c;
 }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+body.theme-turquoise .floating-blob {
+    background: rgba(26, 188, 156, 0.1);
 }
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    overflow-x: hidden;
-    position: relative;
+body.theme-turquoise .blob-1 {
+    background: radial-gradient(circle at center, rgba(26, 188, 156, 0.15), rgba(26, 188, 156, 0.05));
 }
 
-/* Додаємо сині бульбашки на фон */
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at 20% 30%, rgba(13, 110, 253, 0.08) 0%, transparent 30%),
-                radial-gradient(circle at 80% 20%, rgba(13, 110, 253, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 40% 70%, rgba(13, 110, 253, 0.07) 0%, transparent 40%),
-                radial-gradient(circle at 70% 90%, rgba(13, 110, 253, 0.09) 0%, transparent 30%),
-                radial-gradient(circle at 10% 60%, rgba(13, 110, 253, 0.06) 0%, transparent 25%),
-                radial-gradient(circle at 90% 40%, rgba(13, 110, 253, 0.04) 0%, transparent 30%);
-    pointer-events: none;
-    z-index: 0;
+body.theme-turquoise .blob-2 {
+    background: radial-gradient(circle at center, rgba(26, 188, 156, 0.12), rgba(26, 188, 156, 0.04));
 }
 
-/* Додаємо плаваючі бульбашки */
-.floating-blob {
-    position: fixed;
-    border-radius: 50%;
-    background: rgba(13, 110, 253, 0.1);
-    filter: blur(40px);
-    z-index: 0;
-    animation: float 20s infinite linear;
+body.theme-turquoise .blob-3 {
+    background: radial-gradient(circle at center, rgba(26, 188, 156, 0.1), rgba(26, 188, 156, 0.03));
 }
 
-.blob-1 {
-    width: 300px;
-    height: 300px;
-    top: 10%;
-    left: -100px;
-    animation-duration: 30s;
-    background: radial-gradient(circle at center, rgba(13, 110, 253, 0.15), rgba(13, 110, 253, 0.05));
+body.theme-turquoise .blob-4 {
+    background: radial-gradient(circle at center, rgba(26, 188, 156, 0.08), rgba(26, 188, 156, 0.02));
 }
 
-.blob-2 {
-    width: 250px;
-    height: 250px;
-    top: 60%;
-    right: -50px;
-    animation-duration: 25s;
-    background: radial-gradient(circle at center, rgba(13, 110, 253, 0.12), rgba(13, 110, 253, 0.04));
+body.theme-turquoise .blob-5 {
+    background: radial-gradient(circle at center, rgba(26, 188, 156, 0.09), rgba(26, 188, 156, 0.03));
 }
 
-.blob-3 {
-    width: 200px;
-    height: 200px;
-    bottom: 10%;
-    left: 30%;
-    animation-duration: 35s;
-    background: radial-gradient(circle at center, rgba(13, 110, 253, 0.1), rgba(13, 110, 253, 0.03));
+body.theme-turquoise::before {
+    background: radial-gradient(circle at 20% 30%, rgba(26, 188, 156, 0.08) 0%, transparent 30%),
+                radial-gradient(circle at 80% 20%, rgba(26, 188, 156, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 40% 70%, rgba(26, 188, 156, 0.07) 0%, transparent 40%),
+                radial-gradient(circle at 70% 90%, rgba(26, 188, 156, 0.09) 0%, transparent 30%),
+                radial-gradient(circle at 10% 60%, rgba(26, 188, 156, 0.06) 0%, transparent 25%),
+                radial-gradient(circle at 90% 40%, rgba(26, 188, 156, 0.04) 0%, transparent 30%);
 }
 
-.blob-4 {
-    width: 180px;
-    height: 180px;
-    top: 40%;
-    left: 60%;
-    animation-duration: 28s;
-    background: radial-gradient(circle at center, rgba(13, 110, 253, 0.08), rgba(13, 110, 253, 0.02));
-}
-
-.blob-5 {
-    width: 150px;
-    height: 150px;
-    top: 20%;
-    left: 70%;
-    animation-duration: 33s;
-    background: radial-gradient(circle at center, rgba(13, 110, 253, 0.09), rgba(13, 110, 253, 0.03));
-}
-
-/* Анімація плаваючих бульбашок */
-@keyframes float {
-    0% {
-        transform: translate(0, 0) scale(1);
-    }
-    25% {
-        transform: translate(50px, 50px) scale(1.05);
-    }
-    50% {
-        transform: translate(0, 100px) scale(1);
-    }
-    75% {
-        transform: translate(-50px, 50px) scale(0.95);
-    }
-    100% {
-        transform: translate(0, 0) scale(1);
-    }
-}
-
-header {
-    display: flex;
-    justify-content: center;
-    padding: 15px 5%;
-    background-color: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    position: fixed;
-    width: 100%;
-    z-index: 100;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    z-index: 201;
-    text-decoration: none;
-    position: absolute;
-    left: 5%;
-}
-
-.logo-icon {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+body.theme-turquoise .logo-icon {
     background-color: var(--primary-color);
-    color: white;
-    font-family: 'Orbitron', sans-serif;
-    font-weight: bold;
-    font-size: 20px;
-    border-radius: 4px;
-    box-shadow: 0 0 10px rgba(13, 110, 253, 0.5);
+    box-shadow: 0 0 10px rgba(26, 188, 156, 0.5);
 }
 
-.logo-text-container {
-    position: relative;
-    overflow: hidden;
+body.theme-turquoise .logo-text {
+    text-shadow: 0 0 10px rgba(26, 188, 156, 0.3);
 }
 
-/* Оновлений стиль для переливання тексту */
-.logo-text {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    position: relative;
-    background: linear-gradient(
-        90deg, 
-        var(--gradient-start) 0%, 
-        var(--gradient-mid1) 20%, 
-        var(--gradient-mid2) 40%, 
-        var(--gradient-mid3) 60%, 
-        var(--gradient-mid4) 80%, 
-        var(--gradient-end) 100%
-    );
-    background-size: 200% auto;
-    color: transparent;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: shimmer 4s linear infinite;
-    text-shadow: 0 0 10px rgba(13, 110, 253, 0.3);
+body.theme-turquoise .nav-container {
+    background-color: rgba(26, 188, 156, 0.1);
+    box-shadow: 0 0 15px rgba(26, 188, 156, 0.2);
 }
 
+body.theme-turquoise nav a:hover {
+    background-color: rgba(26, 188, 156, 0.3);
+    box-shadow: 0 0 10px rgba(26, 188, 156, 0.3);
+}
+
+body.theme-turquoise nav a.active {
+    background-color: var(--primary-color);
+    box-shadow: 0 0 15px rgba(26, 188, 156, 0.5);
+}
+
+body.theme-turquoise .join-button {
+    background: linear-gradient(90deg, #1abc9c, #16a085);
+    box-shadow: 0 0 20px rgba(26, 188, 156, 0.4);
+}
+
+body.theme-turquoise .join-button:hover, body.theme-turquoise .join-button:active {
+    box-shadow: 0 0 30px rgba(26, 188, 156, 0.7);
+}
+
+body.theme-turquoise .mid-image {
+    box-shadow: 0 0 30px rgba(26, 188, 156, 0.3);
+}
+
+/* Замінюємо колір градієнта для SVG при бірюзовій темі */
+body.theme-turquoise #glow-gradient stop:nth-child(1) {
+    stop-color: #1abc9c;
+}
+
+body.theme-turquoise #glow-gradient stop:nth-child(2) {
+    stop-color: #48c9b0;
+}
+
+body.theme-turquoise #glow-gradient stop:nth-child(3) {
+    stop-color: #117a65;
+}
+
+body.theme-turquoise .svg-blue-elements {
+    stroke: #1abc9c;
+}
+
+body.theme-turquoise .svg-filled-elements {
+    fill: #1abc9c;
+}
+
+/* Додаємо стилі для SVG елементів, щоб забезпечити плавну зміну кольорів при зміні теми */
+.svg-blue-elements {
+    transition: stroke 0.3s ease;
+}
+
+.svg-filled-elements {
+    transition: fill 0.3s ease;
+}
+
+/* Покращуємо анімацію логотипу */
 @keyframes shimmer {
     0% {
         background-position: 0% center;
-        text-shadow: 0 0 5px rgba(13, 110, 253, 0.2);
+        text-shadow: 0 0 5px rgba(var(--primary-color-rgb, 13, 110, 253), 0.2);
     }
     50% {
-        text-shadow: 0 0 20px rgba(13, 110, 253, 0.6);
+        text-shadow: 0 0 20px rgba(var(--primary-color-rgb, 13, 110, 253), 0.6);
     }
     100% {
         background-position: 200% center;
-        text-shadow: 0 0 5px rgba(13, 110, 253, 0.2);
+        text-shadow: 0 0 5px rgba(var(--primary-color-rgb, 13, 110, 253), 0.2);
     }
 }
 
-/* Змінюємо стиль для центрування кнопок */
-nav ul {
-    display: flex;
-    list-style: none;
-    gap: 30px;
-    padding: 0;
-    margin: 0;
-    justify-content: center; /* Центруємо кнопки по горизонталі */
-}
-
-/* Додаємо стиль для контейнеру заокруглених кнопок */
-.nav-container {
-    display: flex;
-    gap: 10px;
-    background-color: rgba(13, 110, 253, 0.1);
-    border-radius: 30px;
-    padding: 6px;
-    box-shadow: 0 0 15px rgba(13, 110, 253, 0.2);
-}
-
-/* Стиль для заокруглених кнопок */
-nav a {
-    color: var(--text-color);
-    text-decoration: none;
-    transition: all 0.3s;
-    position: relative;
-    font-size: 1rem;
-    padding: 8px 16px;
-    border-radius: 20px; /* Сильно заокруглені краї */
-    display: inline-block;
-    background-color: transparent;
-}
-
-nav a:hover {
-    color: white;
-    background-color: rgba(13, 110, 253, 0.3);
-    box-shadow: 0 0 10px rgba(13, 110, 253, 0.3);
-}
-
-nav a.active {
-    background-color: var(--primary-color);
-    color: white;
-    box-shadow: 0 0 15px rgba(13, 110, 253, 0.5);
-}
-
-.menu-toggle {
-    display: none;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 30px;
-    height: 21px;
-    cursor: pointer;
-    z-index: 200;
-    position: absolute;
-    right: 5%;
-}
-
-.menu-toggle span {
-    width: 100%;
-    height: 3px;
-    background-color: var(--text-color);
-    border-radius: 3px;
-    transition: all 0.3s ease-in-out;
-}
-
-main {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 80px 20px 20px;
-    text-align: center;
-    position: relative;
-    z-index: 1;
-}
-
-.mid-content {
-    max-width: 1200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    margin-top: 40px;
-}
-
-h1 {
-    font-size: clamp(1.8rem, 5vw, 2.2rem);
-    margin-bottom: 20px;
-    line-height: 1.2;
-}
-
-.highlight {
-    color: var(--primary-color);
-}
-
-p {
-    font-size: clamp(1rem, 2vw, 1.1rem);
-    max-width: 600px;
-    margin-bottom: 30px;
-    line-height: 1.6;
-}
-
-.join-button {
-    display: inline-block;
-    padding: 12px 25px;
-    background: linear-gradient(90deg, #0d6efd, #4285f4);
-    color: white;
-    text-decoration: none;
-    border-radius: 30px;
-    font-size: clamp(0.9rem, 2vw, 1.1rem);
-    font-weight: 600;
-    box-shadow: 0 0 20px rgba(13, 110, 253, 0.4);
-    transition: all 0.3s;
-    margin-top: 20px;
-    position: relative;
-    overflow: hidden;
-    width: auto;
-    max-width: 90%;
-}
-
-.join-button:hover, .join-button:active {
-    transform: translateY(-3px);
-    box-shadow: 0 0 30px rgba(13, 110, 253, 0.7);
-}
-
-.mid-image {
-    max-width: 90%;
-    height: auto;
-    margin: 30px 0;
-    border-radius: 10px;
-    box-shadow: 0 0 30px rgba(13, 110, 253, 0.3);
-}
-
-/* Стилі для фіолетової теми */
-body.theme-purple {
-    --primary-color: #9b59b6;
-    --primary-light: #c39bd3;
-    --gradient-start: #9b59b6;
-    --gradient-mid1: #c39bd3;
-    --gradient-mid2: #8e44ad;
-    --gradient-mid3: #a569bd;
-    --gradient-mid4: #d2b4de;
-    --gradient-end: #9b59b6;
-}
-
-body.theme-purple .floating-blob {
-    background: rgba(155, 89, 182, 0.1);
-}
-
-body.theme-purple .blob-1 {
-    background: radial-gradient(circle at center, rgba(155, 89, 182, 0.15), rgba(155, 89, 182, 0.05));
-}
-
-body.theme-purple .blob-2 {
-    background: radial-gradient(circle at center, rgba(155, 89, 182, 0.12), rgba(155, 89, 182, 0.04));
-}
-
-body.theme-purple .blob-3 {
-    background: radial-gradient(circle at center, rgba(155, 89, 182, 0.1), rgba(155, 89, 182, 0.03));
-}
-
-body.theme-purple .blob-4 {
-    background: radial-gradient(circle at center, rgba(155, 89, 182, 0.08), rgba(155, 89, 182, 0.02));
-}
-
-body.theme-purple .blob-5 {
-    background: radial-gradient(circle at center, rgba(155, 89, 182, 0.09), rgba(155, 89, 182, 0.03));
-}
-
-body.theme-purple::before {
-    background: radial-gradient(circle at 20% 30%, rgba(155, 89, 182, 0.08) 0%, transparent 30%),
-               radial-gradient(circle at 80% 20%, rgba(155, 89, 182, 0.05) 0%, transparent 20%),
-               radial-gradient(circle at 40% 70%, rgba(155, 89, 182, 0.07) 0%, transparent 40%),
-               radial-gradient(circle at 70% 90%, rgba(155, 89, 182, 0.09) 0%, transparent 30%),
-               radial-gradient(circle at 10% 60%, rgba(155, 89, 182, 0.06) 0%, transparent 25%),
-               radial-gradient(circle at 90% 40%, rgba(155, 89, 182, 0.04) 0%, transparent 30%);
-}
-
-body.theme-purple .logo-icon {
-    background-color: var(--primary-color);
-    box-shadow: 0 0 10px rgba(155, 89, 182, 0.5);
-}
-
-body.theme-purple .logo-text {
-    text-shadow: 0 0 10px rgba(155, 89, 182, 0.3);
-}
-
-body.theme-purple .nav-container {
-    background-color: rgba(155, 89, 182, 0.1);
-    box-shadow: 0 0 15px rgba(155, 89, 182, 0.2);
-}
-
-body.theme-purple nav a:hover {
-    background-color: rgba(155, 89, 182, 0.3);
-    box-shadow: 0 0 10px rgba(155, 89, 182, 0.3);
-}
-
-body.theme-purple nav a.active {
-    background-color: var(--primary-color);
-    box-shadow: 0 0 15px rgba(155, 89, 182, 0.5);
-}
-
-body.theme-purple .join-button {
-    background: linear-gradient(90deg, #9b59b6, #8e44ad);
-    box-shadow: 0 0 20px rgba(155, 89, 182, 0.4);
-}
-
-body.theme-purple .join-button:hover, body.theme-purple .join-button:active {
-    box-shadow: 0 0 30px rgba(155, 89, 182, 0.7);
-}
-
-body.theme-purple .mid-image {
-    box-shadow: 0 0 30px rgba(155, 89, 182, 0.3);
-}
-
-/* Замінюємо колір градієнта для SVG при фіолетовій темі */
-body.theme-purple #glow-gradient stop:nth-child(1) {
-    stop-color: #9b59b6;
-}
-
-body.theme-purple #glow-gradient stop:nth-child(2) {
-    stop-color: #c39bd3;
-}
-
-body.theme-purple #glow-gradient stop:nth-child(3) {
-    stop-color: #4a235a;
-}
-
-body.theme-purple .svg-blue-elements {
-    stroke: #9b59b6;
-}
-
-body.theme-purple .svg-filled-elements {
-    fill: #9b59b6;
-}
-
-@media (max-width: 992px) {
-    .mid-content {
-        padding: 0 20px;
-    }
-}
-
-@media (max-width: 768px) {
-    header {
-        padding: 15px 20px;
-        justify-content: space-between;
-    }
-    
-    .menu-toggle {
-        display: flex;
-    }
-    
-    nav {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 70%;
-        height: 100vh;
-        background-color: rgba(0, 0, 0, 0.95);
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-        transition: all 0.5s ease;
-        z-index: 150;
-        padding-top: 80px;
-    }
-    
-    nav.active {
-        right: 0;
-    }
-    
-    nav ul {
-        flex-direction: column;
-        align-items: center;
-        gap: 40px;
-        width: 100%;
-    }
-    
-    .nav-container {
-        flex-direction: column;
-        background-color: transparent;
-        box-shadow: none;
-        width: 100%;
-    }
-    
-    nav li {
-        width: 100%;
-        text-align: center;
-    }
-    
-    nav a {
-        font-size: 1.2rem;
-        display: block;
-        padding: 10px 0;
-        width: 100%;
-        border-radius: 20px;
-    }
-    
-    .mid-content {
-        margin-top: 60px;
-        padding-bottom: 60px;
-    }
-    
-    .mid-image {
-        max-width: 100%;
-        margin: 20px 0;
-    }
-    
-    .logo-text {
-        font-size: 18px;
-    }
-    
-    .logo-icon {
-        width: 35px;
-        height: 35px;
-        font-size: 18px;
-    }
-    
-    main {
-        padding-top: 70px;
-        padding-bottom: 40px;
-        justify-content: flex-start;
-    }
-}
-
-@media (max-width: 480px) {
-    h1 {
-        font-size: 1.8rem;
-    }
-    
-    p {
-        font-size: 1rem;
-    }
-    
-    .join-button {
-        padding: 10px 20px;
-        font-size: 1rem;
-    }
-    
-    .mid-image {
-        max-width: 100%;
-        width: 100%;
-        height: auto;
-        min-height: 200px;
-    }
-    
-    /* Збільшуємо відступ для мобільного меню */
-    nav ul {
-        gap: 25px;
-        margin-top: 20px;
-    }
-    
-    .mid-content {
-        margin-top: 40px;
-    }
-}
-
-/* Телефони в альбомній орієнтації */
-@media (max-height: 500px) and (orientation: landscape) {
-    main {
-        padding-top: 80px;
-        justify-content: flex-start;
-    }
-    
-    h1 {
-        font-size: 1.7rem;
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-    
-    p {
-        margin-bottom: 15px;
-    }
-    
-    .mid-image {
-        margin: 15px 0;
-        max-height: 40vh;
-    }
+/* Забезпечуємо, щоб мобільне меню працювало правильно */
+#mobileNav.active {
+    right: 0;
 }
