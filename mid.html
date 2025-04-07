@@ -29,6 +29,99 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Додаємо сині бульбашки на фон */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(13, 110, 253, 0.08) 0%, transparent 30%),
+                        radial-gradient(circle at 80% 20%, rgba(13, 110, 253, 0.05) 0%, transparent 20%),
+                        radial-gradient(circle at 40% 70%, rgba(13, 110, 253, 0.07) 0%, transparent 40%),
+                        radial-gradient(circle at 70% 90%, rgba(13, 110, 253, 0.09) 0%, transparent 30%),
+                        radial-gradient(circle at 10% 60%, rgba(13, 110, 253, 0.06) 0%, transparent 25%),
+                        radial-gradient(circle at 90% 40%, rgba(13, 110, 253, 0.04) 0%, transparent 30%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        /* Додаємо плаваючі бульбашки */
+        .floating-blob {
+            position: fixed;
+            border-radius: 50%;
+            background: rgba(13, 110, 253, 0.1);
+            filter: blur(40px);
+            z-index: 0;
+            animation: float 20s infinite linear;
+        }
+        
+        .blob-1 {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: -100px;
+            animation-duration: 30s;
+            background: radial-gradient(circle at center, rgba(13, 110, 253, 0.15), rgba(13, 110, 253, 0.05));
+        }
+        
+        .blob-2 {
+            width: 250px;
+            height: 250px;
+            top: 60%;
+            right: -50px;
+            animation-duration: 25s;
+            background: radial-gradient(circle at center, rgba(13, 110, 253, 0.12), rgba(13, 110, 253, 0.04));
+        }
+        
+        .blob-3 {
+            width: 200px;
+            height: 200px;
+            bottom: 10%;
+            left: 30%;
+            animation-duration: 35s;
+            background: radial-gradient(circle at center, rgba(13, 110, 253, 0.1), rgba(13, 110, 253, 0.03));
+        }
+        
+        .blob-4 {
+            width: 180px;
+            height: 180px;
+            top: 40%;
+            left: 60%;
+            animation-duration: 28s;
+            background: radial-gradient(circle at center, rgba(13, 110, 253, 0.08), rgba(13, 110, 253, 0.02));
+        }
+        
+        .blob-5 {
+            width: 150px;
+            height: 150px;
+            top: 20%;
+            left: 70%;
+            animation-duration: 33s;
+            background: radial-gradient(circle at center, rgba(13, 110, 253, 0.09), rgba(13, 110, 253, 0.03));
+        }
+        
+        /* Анімація плаваючих бульбашок */
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            25% {
+                transform: translate(50px, 50px) scale(1.05);
+            }
+            50% {
+                transform: translate(0, 100px) scale(1);
+            }
+            75% {
+                transform: translate(-50px, 50px) scale(0.95);
+            }
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
         }
         
         header {
@@ -73,32 +166,45 @@
             overflow: hidden;
         }
         
+        /* Оновлений стиль для переливання тексту */
         .logo-text {
             font-family: 'Orbitron', sans-serif;
             font-size: 20px;
             font-weight: 700;
-            color: var(--primary-color);
             letter-spacing: 1px;
             text-transform: uppercase;
-            background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+            position: relative;
+            background: linear-gradient(
+                90deg, 
+                #0d6efd 0%, 
+                #83a4ff 20%, 
+                #4169e1 40%, 
+                #1e90ff 60%, 
+                #00bfff 80%, 
+                #0d6efd 100%
+            );
+            background-size: 200% auto;
+            color: transparent;
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: glow 2s ease-in-out infinite alternate;
-            position: relative;
+            animation: shimmer 4s linear infinite;
+            text-shadow: 0 0 10px rgba(13, 110, 253, 0.3);
         }
         
-        /* Змінюємо анімацію блиску, щоб видалити фіолетові полоси */
-        @keyframes glow {
-            from {
+        @keyframes shimmer {
+            0% {
+                background-position: 0% center;
                 text-shadow: 0 0 5px rgba(13, 110, 253, 0.2);
             }
-            to {
-                text-shadow: 0 0 15px rgba(13, 110, 253, 0.5);
+            50% {
+                text-shadow: 0 0 20px rgba(13, 110, 253, 0.6);
+            }
+            100% {
+                background-position: 200% center;
+                text-shadow: 0 0 5px rgba(13, 110, 253, 0.2);
             }
         }
-        
-        /* Видалення анімації shine, яка створює полоси */
         
         .menu-toggle {
             display: none;
@@ -124,24 +230,31 @@
             flex-grow: 1;
         }
         
+        /* Центруємо кнопки */
         nav ul {
             display: flex;
             list-style: none;
             gap: 30px;
             padding: 0;
             margin: 0;
+            justify-content: center;
         }
         
+        /* Оновлений стиль для кнопок навігації */
         nav a {
             color: var(--text-color);
             text-decoration: none;
-            transition: color 0.3s;
+            transition: all 0.3s;
             position: relative;
             font-size: 1rem;
+            padding: 8px 16px;
+            border-radius: 4px;
+            display: inline-block;
         }
         
         nav a:hover {
             color: var(--primary-color);
+            background-color: rgba(13, 110, 253, 0.1);
         }
         
         nav a::after {
@@ -149,19 +262,20 @@
             position: absolute;
             width: 0;
             height: 2px;
-            bottom: -5px;
-            left: 0;
+            bottom: 0;
+            left: 50%;
             background-color: var(--primary-color);
-            transition: width 0.3s;
+            transition: all 0.3s;
+            transform: translateX(-50%);
         }
         
         nav a:hover::after {
-            width: 100%;
+            width: 80%;
         }
         
         /* На цій сторінці активна вкладка "Мід" */
         nav a[href="mid.html"]::after {
-            width: 100%;
+            width: 80%;
         }
         
         main {
@@ -173,6 +287,7 @@
             padding: 80px 20px 20px;
             text-align: center;
             position: relative;
+            z-index: 1;
         }
         
         .mid-content {
@@ -260,7 +375,7 @@
                 align-items: center;
                 transition: all 0.5s ease;
                 z-index: 150;
-                padding-top: 80px; /* Відступ зверху для уникнення накладання на логотип */
+                padding-top: 80px;
             }
             
             nav.active {
@@ -370,6 +485,13 @@
     </style>
 </head>
 <body>
+    <!-- Додаємо плаваючі бульбашки на фоні -->
+    <div class="floating-blob blob-1"></div>
+    <div class="floating-blob blob-2"></div>
+    <div class="floating-blob blob-3"></div>
+    <div class="floating-blob blob-4"></div>
+    <div class="floating-blob blob-5"></div>
+    
     <header>
         <div class="logo">
             <div class="logo-icon">ZP</div>
