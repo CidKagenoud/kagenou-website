@@ -138,12 +138,14 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
         
+        /* Модифікуємо логотип, щоб він був в лівому куті */
         .logo {
             display: flex;
             align-items: center;
             gap: 10px;
             z-index: 201;
             text-decoration: none;
+            margin-right: auto; /* Притискаємо до лівого краю */
         }
         
         .logo-icon {
@@ -224,10 +226,14 @@
             transition: all 0.3s ease-in-out;
         }
         
+        /* Центруємо навігацію */
         nav {
             display: flex;
             justify-content: center;
-            flex-grow: 1;
+            position: absolute;
+            left: 0;
+            right: 0;
+            z-index: 90;
         }
         
         /* Змінюємо стиль для центрування кнопок */
@@ -240,7 +246,17 @@
             justify-content: center; /* Центруємо кнопки по горизонталі */
         }
         
-        /* Додаємо більше стилю для кнопок */
+        /* Додаємо стиль для контейнеру заокруглених кнопок */
+        .nav-container {
+            display: flex;
+            gap: 10px;
+            background-color: rgba(13, 110, 253, 0.1);
+            border-radius: 30px;
+            padding: 6px;
+            box-shadow: 0 0 15px rgba(13, 110, 253, 0.2);
+        }
+        
+        /* Стиль для заокруглених кнопок */
         nav a {
             color: var(--text-color);
             text-decoration: none;
@@ -248,29 +264,21 @@
             position: relative;
             font-size: 1rem;
             padding: 8px 16px;
-            border-radius: 4px;
+            border-radius: 20px; /* Сильно заокруглені краї */
             display: inline-block;
+            background-color: transparent;
         }
         
         nav a:hover {
-            color: var(--primary-color);
-            background-color: rgba(13, 110, 253, 0.1);
+            color: white;
+            background-color: rgba(13, 110, 253, 0.3);
+            box-shadow: 0 0 10px rgba(13, 110, 253, 0.3);
         }
         
-        nav a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 50%;
+        nav a.active {
             background-color: var(--primary-color);
-            transition: all 0.3s;
-            transform: translateX(-50%);
-        }
-        
-        nav a:hover::after {
-            width: 80%;
+            color: white;
+            box-shadow: 0 0 15px rgba(13, 110, 253, 0.5);
         }
         
         main {
@@ -391,6 +399,13 @@
                 width: 100%;
             }
             
+            .nav-container {
+                flex-direction: column;
+                background-color: transparent;
+                box-shadow: none;
+                width: 100%;
+            }
+            
             nav li {
                 width: 100%;
                 text-align: center;
@@ -401,6 +416,7 @@
                 display: block;
                 padding: 10px 0;
                 width: 100%;
+                border-radius: 20px;
             }
             
             .main-content {
@@ -501,8 +517,12 @@
         
         <nav id="mobileNav">
             <ul>
-                <li><a href="index.html">Головна</a></li>
-                <li><a href="mid.html">Мід</a></li>
+                <li>
+                    <div class="nav-container">
+                        <a href="index.html" class="active">Головна</a>
+                        <a href="mid.html">Мід</a>
+                    </div>
+                </li>
             </ul>
         </nav>
     </header>
