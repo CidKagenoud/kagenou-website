@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Налаштування - Zypherion</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='10' fill='%230d6efd'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Orbitron, sans-serif' font-weight='bold' font-size='50' fill='white'>ZP</text></svg>" type="image/svg+xml">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='10' fill='%238a2be2'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Orbitron, sans-serif' font-weight='bold' font-size='50' fill='white'>ZP</text></svg>" type="image/svg+xml">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap');
         
@@ -34,45 +34,6 @@
             --logo-gradient: linear-gradient(90deg, #8a2be2 0%, #bf8fff 50%, #8a2be2 100%);
             --logo-bg: #8a2be2;
             --logo-shadow: rgba(138, 43, 226, 0.5);
-        }
-        
-        /* Червона тема */
-        body.theme-red {
-            --primary-color: #dc3545;
-            --primary-light: #ff7f87;
-            --primary-dark: #bb2d3b;
-            --blob-color: rgba(220, 53, 69, 0.1);
-            --blob-gradient-1: rgba(220, 53, 69, 0.15);
-            --blob-gradient-2: rgba(220, 53, 69, 0.05);
-            --logo-gradient: linear-gradient(90deg, #dc3545 0%, #ff7f87 50%, #dc3545 100%);
-            --logo-bg: #dc3545;
-            --logo-shadow: rgba(220, 53, 69, 0.5);
-        }
-        
-        /* Зелена тема */
-        body.theme-green {
-            --primary-color: #28a745;
-            --primary-light: #75df8e;
-            --primary-dark: #218838;
-            --blob-color: rgba(40, 167, 69, 0.1);
-            --blob-gradient-1: rgba(40, 167, 69, 0.15);
-            --blob-gradient-2: rgba(40, 167, 69, 0.05);
-            --logo-gradient: linear-gradient(90deg, #28a745 0%, #75df8e 50%, #28a745 100%);
-            --logo-bg: #28a745;
-            --logo-shadow: rgba(40, 167, 69, 0.5);
-        }
-        
-        /* Оранжева тема */
-        body.theme-orange {
-            --primary-color: #fd7e14;
-            --primary-light: #ffb470;
-            --primary-dark: #e56b00;
-            --blob-color: rgba(253, 126, 20, 0.1);
-            --blob-gradient-1: rgba(253, 126, 20, 0.15);
-            --blob-gradient-2: rgba(253, 126, 20, 0.05);
-            --logo-gradient: linear-gradient(90deg, #fd7e14 0%, #ffb470 50%, #fd7e14 100%);
-            --logo-bg: #fd7e14;
-            --logo-shadow: rgba(253, 126, 20, 0.5);
         }
         
         * {
@@ -399,140 +360,34 @@
         }
         
         /* Зразки тем */
-        .theme-sample {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 2px solid transparent;
-        }
-        
-        .theme-sample:hover {
-            transform: scale(1.1);
-        }
-        
-        .theme-sample.active {
-            border: 2px solid white;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
-        }
-        
-        .theme-blue {
-            background: linear-gradient(135deg, #0d6efd, #83a4ff);
-        }
-        
-        .theme-purple {
-            background: linear-gradient(135deg, #8a2be2, #bf8fff);
-        }
-        
-        .theme-red {
-            background: linear-gradient(135deg, #dc3545, #ff7f87);
-        }
-        
-        .theme-green {
-            background: linear-gradient(135deg, #28a745, #75df8e);
-        }
-        
-        .theme-orange {
-            background: linear-gradient(135deg, #fd7e14, #ffb470);
-        }
-        
-        /* Модальне вікно вибору теми */
-        .theme-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            backdrop-filter: blur(5px);
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .theme-modal.active {
-            display: flex;
-        }
-        
-        .theme-modal-content {
-            background-color: rgba(0, 0, 0, 0.8);
+        .theme-toggle {
+            width: 60px;
+            height: 30px;
+            background-color: var(--blob-color);
             border-radius: 15px;
-            padding: 30px;
-            max-width: 500px;
-            width: 90%;
-            box-shadow: 0 0 30px var(--logo-shadow);
             position: relative;
-            border: 1px solid var(--primary-color);
-        }
-        
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        
-        .modal-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
-            color: var(--primary-light);
-            margin: 0;
-        }
-        
-        .close-modal {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
             cursor: pointer;
             transition: all 0.3s;
         }
         
-        .close-modal:hover {
-            color: var(--primary-color);
-            transform: scale(1.1);
-        }
-        
-        .theme-options {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .theme-option {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-            padding: 10px;
-            border-radius: 10px;
-            transition: all 0.3s;
-        }
-        
-        .theme-option:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        
-        .theme-circle {
-            width: 50px;
-            height: 50px;
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            width: 22px;
+            height: 22px;
             border-radius: 50%;
-            margin-bottom: 10px;
-            border: 2px solid transparent;
+            background-color: white;
+            top: 4px;
+            left: 4px;
             transition: all 0.3s;
         }
         
-        .theme-option.active .theme-circle {
-            border: 2px solid white;
-            box-shadow: 0 0 15px white;
+        .theme-toggle.active {
+            background-color: var(--primary-color);
         }
         
-        .theme-option-label {
-            font-size: 0.9rem;
-            text-align: center;
+        .theme-toggle.active::after {
+            left: 34px;
         }
         
         /* Кнопка збереження */
@@ -668,10 +523,6 @@
                 display: flex;
                 justify-content: flex-end;
             }
-            
-            .theme-options {
-                grid-template-columns: repeat(2, 1fr);
-            }
         }
     </style>
 </head>
@@ -723,11 +574,11 @@
                 
                 <div class="setting-item">
                     <div class="setting-info">
-                        <div class="setting-label">Теми</div>
-                        <div class="setting-description">Оберіть кольорову тему для сайту</div>
+                        <div class="setting-label">Фіолетова тема</div>
+                        <div class="setting-description">Активуйте фіолетову тему для сайту</div>
                     </div>
                     <div class="setting-control">
-                        <div class="theme-sample theme-blue active" id="openThemeModal"></div>
+                        <div class="theme-toggle" id="themeToggle"></div>
                     </div>
                 </div>
             </div>
@@ -735,42 +586,6 @@
             <button class="save-button" id="saveSettings">Зберегти</button>
         </div>
     </main>
-    
-    <!-- Модальне вікно вибору теми -->
-    <div class="theme-modal" id="themeModal">
-        <div class="theme-modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Оберіть тему</h3>
-                <button class="close-modal" id="closeThemeModal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>Оберіть колірну схему для інтерфейсу Zypherion:</p>
-                <div class="theme-options">
-                    <div class="theme-option active" data-theme="default">
-                        <div class="theme-circle theme-blue"></div>
-                        <div class="theme-option-label">Синя</div>
-                    </div>
-                    <div class="theme-option" data-theme="theme-purple">
-                        <div class="theme-circle theme-purple"></div>
-                        <div class="theme-option-label">Фіолетова</div>
-                    </div>
-                    <div class="theme-option" data-theme="theme-red">
-                        <div class="theme-circle theme-red"></div>
-                        <div class="theme-option-label">Червона</div>
-                    </div>
-                    <div class="theme-option" data-theme="theme-green">
-                        <div class="theme-circle theme-green"></div>
-                        <div class="theme-option-label">Зелена</div>
-                    </div>
-                    <div class="theme-option" data-theme="theme-orange">
-                        <div class="theme-circle theme-orange"></div>
-                        <div class="theme-option-label">Оранжева</div>
-                    </div>
-                </div>
-            </div>
-            <button class="save-button" id="applyTheme">Застосувати</button>
-        </div>
-    </div>
     
     <!-- Повідомлення про успішне збереження -->
     <div class="save-message" id="saveMessage">
@@ -786,87 +601,45 @@
         
         // Функція для завантаження збереженої теми
         function loadSavedTheme() {
-            const savedTheme = localStorage.getItem('zypherionTheme');
-            if (savedTheme) {
-                applyTheme(savedTheme);
-                updateThemeUI(savedTheme);
+            const themeEnabled = localStorage.getItem('zypherionPurpleTheme') === 'true';
+            if (themeEnabled) {
+                enablePurpleTheme();
+            } else {
+                disablePurpleTheme();
+            }
+            updateThemeToggle(themeEnabled);
+        }
+        
+        // Функції для вмикання/вимикання фіолетової теми
+        function enablePurpleTheme() {
+            document.body.classList.add('theme-purple');
+        }
+        
+        function disablePurpleTheme() {
+            document.body.classList.remove('theme-purple');
+        }
+        
+        // Оновлення перемикача теми
+        function updateThemeToggle(enabled) {
+            const toggle = document.getElementById('themeToggle');
+            if (enabled) {
+                toggle.classList.add('active');
+            } else {
+                toggle.classList.remove('active');
             }
         }
         
-        // Функція для застосування теми
-        function applyTheme(theme) {
-            // Спочатку очищаємо всі класи теми
-            document.body.classList.remove('theme-purple', 'theme-red', 'theme-green', 'theme-orange');
+        // Обробник для перемикання теми
+        document.getElementById('themeToggle').addEventListener('click', function() {
+            const isEnabled = this.classList.toggle('active');
             
-            // Застосовуємо нову тему, якщо це не стандартна
-            if (theme !== 'default') {
-                document.body.classList.add(theme);
+            if (isEnabled) {
+                enablePurpleTheme();
+                localStorage.setItem('zypherionPurpleTheme', 'true');
+            } else {
+                disablePurpleTheme();
+                localStorage.setItem('zypherionPurpleTheme', 'false');
             }
-        }
-        
-        // Оновлення інтерфейсу відповідно до обраної теми
-        function updateThemeUI(theme) {
-            // Оновлення активної опції в модальному вікні
-            document.querySelectorAll('.theme-option').forEach(option => {
-                option.classList.remove('active');
-                if (option.getAttribute('data-theme') === theme) {
-                    option.classList.add('active');
-                }
-            });
-            
-            // Оновлення зразка в налаштуваннях
-            const themePreview = document.getElementById('openThemeModal');
-            themePreview.className = 'theme-sample active';
-            
-            // Додаємо відповідний клас для кольору
-            switch (theme) {
-                case 'theme-purple':
-                    themePreview.classList.add('theme-purple');
-                    break;
-                case 'theme-red':
-                    themePreview.classList.add('theme-red');
-                    break;
-                case 'theme-green':
-                    themePreview.classList.add('theme-green');
-                    break;
-                case 'theme-orange':
-                    themePreview.classList.add('theme-orange');
-                    break;
-                default:
-                    themePreview.classList.add('theme-blue');
-            }
-        }
-        
-        // Обробник для відкриття модального вікна теми
-        document.getElementById('openThemeModal').addEventListener('click', function() {
-            document.getElementById('themeModal').classList.add('active');
-        });
-        
-        // Обробник для закриття модального вікна теми
-        document.getElementById('closeThemeModal').addEventListener('click', function() {
-            document.getElementById('themeModal').classList.remove('active');
-        });
-        
-        // Обробник для вибору теми з модального вікна
-        document.getElementById('applyTheme').addEventListener('click', function() {
-            const selectedOption = document.querySelector('.theme-option.active');
-            const theme = selectedOption.getAttribute('data-theme');
-            
-            applyTheme(theme);
-            updateThemeUI(theme);
-            localStorage.setItem('zypherionTheme', theme);
-            
-            document.getElementById('themeModal').classList.remove('active');
-        });
-        
-        // Додавання активного класу при кліку на варіант теми
-        document.querySelectorAll('.theme-option').forEach(option => {
-            option.addEventListener('click', function() {
-                document.querySelectorAll('.theme-option').forEach(opt => {
-                    opt.classList.remove('active');
-                });
-                this.classList.add('active');
-            });
         });
         
         // Обробник кнопки "Зберегти"
