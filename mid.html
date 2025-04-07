@@ -14,6 +14,12 @@
             --primary-light: #83a4ff;
             --text-color: #fff;
             --bg-color: #000;
+            --gradient-start: #0d6efd;
+            --gradient-mid1: #83a4ff;
+            --gradient-mid2: #4169e1;
+            --gradient-mid3: #1e90ff;
+            --gradient-mid4: #00bfff;
+            --gradient-end: #0d6efd;
         }
         
         * {
@@ -177,12 +183,12 @@
             position: relative;
             background: linear-gradient(
                 90deg, 
-                #0d6efd 0%, 
-                #83a4ff 20%, 
-                #4169e1 40%, 
-                #1e90ff 60%, 
-                #00bfff 80%, 
-                #0d6efd 100%
+                var(--gradient-start) 0%, 
+                var(--gradient-mid1) 20%, 
+                var(--gradient-mid2) 40%, 
+                var(--gradient-mid3) 60%, 
+                var(--gradient-mid4) 80%, 
+                var(--gradient-end) 100%
             );
             background-size: 200% auto;
             color: transparent;
@@ -345,6 +351,12 @@
         body.theme-purple {
             --primary-color: #9b59b6;
             --primary-light: #c39bd3;
+            --gradient-start: #9b59b6;
+            --gradient-mid1: #c39bd3;
+            --gradient-mid2: #8e44ad;
+            --gradient-mid3: #a569bd;
+            --gradient-mid4: #d2b4de;
+            --gradient-end: #9b59b6;
         }
         
         body.theme-purple .floating-blob {
@@ -386,17 +398,6 @@
         }
         
         body.theme-purple .logo-text {
-            background: linear-gradient(
-                90deg, 
-                #9b59b6 0%, 
-                #c39bd3 20%, 
-                #8e44ad 40%, 
-                #a569bd 60%, 
-                #d2b4de 80%, 
-                #9b59b6 100%
-            );
-            -webkit-background-clip: text;
-            background-clip: text;
             text-shadow: 0 0 10px rgba(155, 89, 182, 0.3);
         }
         
@@ -426,6 +427,27 @@
         
         body.theme-purple .mid-image {
             box-shadow: 0 0 30px rgba(155, 89, 182, 0.3);
+        }
+        
+        /* Замінюємо колір градієнта для SVG при фіолетовій темі */
+        body.theme-purple #glow-gradient stop:nth-child(1) {
+            stop-color: #9b59b6;
+        }
+        
+        body.theme-purple #glow-gradient stop:nth-child(2) {
+            stop-color: #c39bd3;
+        }
+        
+        body.theme-purple #glow-gradient stop:nth-child(3) {
+            stop-color: #4a235a;
+        }
+        
+        body.theme-purple .svg-blue-elements {
+            stroke: #9b59b6;
+        }
+        
+        body.theme-purple .svg-filled-elements {
+            fill: #9b59b6;
         }
         
         @media (max-width: 992px) {
@@ -629,7 +651,7 @@
                 </defs>
                 
                 <!-- Символічне зображення мережевого з'єднання -->
-                <g fill="none" stroke="#0d6efd" stroke-width="2">
+                <g fill="none" stroke="#0d6efd" stroke-width="2" class="svg-blue-elements">
                     <line x1="100" y1="100" x2="200" y2="150" />
                     <line x1="300" y1="200" x2="200" y2="150" />
                     <line x1="400" y1="100" x2="300" y2="150" />
@@ -640,12 +662,12 @@
                 </g>
                 
                 <!-- Вузли мережі -->
-                <circle cx="100" cy="100" r="8" fill="#0d6efd" />
-                <circle cx="300" cy="200" r="8" fill="#0d6efd" />
-                <circle cx="400" cy="100" r="8" fill="#0d6efd" />
-                <circle cx="200" cy="220" r="8" fill="#0d6efd" />
-                <circle cx="150" cy="220" r="8" fill="#0d6efd" />
-                <circle cx="350" cy="220" r="8" fill="#0d6efd" />
+                <circle cx="100" cy="100" r="8" fill="#0d6efd" class="svg-filled-elements" />
+                <circle cx="300" cy="200" r="8" fill="#0d6efd" class="svg-filled-elements" />
+                <circle cx="400" cy="100" r="8" fill="#0d6efd" class="svg-filled-elements" />
+                <circle cx="200" cy="220" r="8" fill="#0d6efd" class="svg-filled-elements" />
+                <circle cx="150" cy="220" r="8" fill="#0d6efd" class="svg-filled-elements" />
+                <circle cx="350" cy="220" r="8" fill="#0d6efd" class="svg-filled-elements" />
                 
                 <!-- Анімаційні маркери -->
                 <circle cx="250" cy="150" r="12" fill="#ffffff" opacity="0.7" />
