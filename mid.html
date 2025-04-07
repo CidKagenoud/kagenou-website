@@ -207,32 +207,49 @@
             }
         }
         
-        /* Новий стиль для навігації, як на скріншоті */
+        /* Змінюємо стиль для центрування кнопок */
         nav ul {
             display: flex;
             list-style: none;
-            gap: 10px;
+            gap: 30px;
             padding: 0;
             margin: 0;
+            justify-content: center; /* Центруємо кнопки по горизонталі */
         }
         
+        /* Додаємо стиль для контейнеру заокруглених кнопок */
+        .nav-container {
+            display: flex;
+            gap: 10px;
+            background-color: rgba(13, 110, 253, 0.1);
+            border-radius: 30px;
+            padding: 6px;
+            box-shadow: 0 0 15px rgba(13, 110, 253, 0.2);
+        }
+        
+        /* Стиль для заокруглених кнопок */
         nav a {
-            color: white;
+            color: var(--text-color);
             text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-weight: 500;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
+            position: relative;
+            font-size: 1rem;
+            padding: 8px 16px;
+            border-radius: 20px; /* Сильно заокруглені краї */
+            display: inline-block;
+            background-color: transparent;
+        }
+        
+        nav a:hover {
+            color: white;
+            background-color: rgba(13, 110, 253, 0.3);
+            box-shadow: 0 0 10px rgba(13, 110, 253, 0.3);
         }
         
         nav a.active {
-            background-color: #0d6efd;
-            box-shadow: 0 0 10px rgba(13, 110, 253, 0.5);
-        }
-        
-        nav a:hover:not(.active) {
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 0 15px rgba(13, 110, 253, 0.5);
         }
         
         .menu-toggle {
@@ -366,6 +383,13 @@
                 width: 100%;
             }
             
+            .nav-container {
+                flex-direction: column;
+                background-color: transparent;
+                box-shadow: none;
+                width: 100%;
+            }
+            
             nav li {
                 width: 100%;
                 text-align: center;
@@ -376,6 +400,7 @@
                 display: block;
                 padding: 10px 0;
                 width: 100%;
+                border-radius: 20px;
             }
             
             .mid-content {
@@ -477,18 +502,22 @@
             </div>
         </div>
         
-        <nav>
-            <ul>
-                <li><a href="index.html" class="active">Головна</a></li>
-                <li><a href="mid.html">Мід</a></li>
-            </ul>
-        </nav>
-        
         <div class="menu-toggle" id="menuToggle">
             <span></span>
             <span></span>
             <span></span>
         </div>
+        
+        <nav id="mobileNav">
+            <ul>
+                <li>
+                    <div class="nav-container">
+                        <a href="index.html">Головна</a>
+                        <a href="mid.html" class="active">Мід</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
     </header>
     
     <main>
@@ -543,11 +572,11 @@
     <script>
         // JavaScript для мобільного меню
         document.getElementById('menuToggle').addEventListener('click', function() {
-            document.querySelector('nav').classList.toggle('active');
+            document.getElementById('mobileNav').classList.toggle('active');
             const spans = this.querySelectorAll('span');
             
             // Анімація іконки меню
-            if (document.querySelector('nav').classList.contains('active')) {
+            if (document.getElementById('mobileNav').classList.contains('active')) {
                 spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
                 spans[1].style.opacity = '0';
                 spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
@@ -561,7 +590,7 @@
         // Закриваємо меню після кліку на пункт меню
         document.querySelectorAll('nav a').forEach(item => {
             item.addEventListener('click', function() {
-                document.querySelector('nav').classList.remove('active');
+                document.getElementById('mobileNav').classList.remove('active');
                 const spans = document.getElementById('menuToggle').querySelectorAll('span');
                 spans[0].style.transform = 'none';
                 spans[1].style.opacity = '1';
