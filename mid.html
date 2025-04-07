@@ -11,7 +11,7 @@
     <!-- Підключення CSS файлу -->
     <link rel="stylesheet" href="mid.css">
 </head>
-<body>
+<body class="theme-blue">
     <!-- Додаємо плаваючі бульбашки на фоні -->
     <div class="floating-blob blob-1"></div>
     <div class="floating-blob blob-2"></div>
@@ -57,7 +57,6 @@
                 <rect width="500" height="300" fill="#0a0e17" />
                 
                 <!-- Елементи оформлення -->
-                <circle cx="250" cy="150" r="60" fill="url(#glow-gradient)" opacity="0.8" />
                 <defs>
                     <radialGradient id="glow-gradient" cx="50%" cy="50%" r="50%" fx="25%" fy="25%">
                         <stop offset="0%" stop-color="#0d6efd" stop-opacity="0.9" />
@@ -65,6 +64,7 @@
                         <stop offset="100%" stop-color="#001840" stop-opacity="0.1" />
                     </radialGradient>
                 </defs>
+                <circle cx="250" cy="150" r="60" fill="url(#glow-gradient)" opacity="0.8" />
                 
                 <!-- Символічне зображення мережевого з'єднання -->
                 <g fill="none" stroke="#0d6efd" stroke-width="2" class="svg-blue-elements">
@@ -98,12 +98,14 @@
     <script>
         // JavaScript для мобільного меню
         document.addEventListener('DOMContentLoaded', function() {
+            console.log("Сторінка завантажена!");
             // Ініціалізація меню
             const menuToggle = document.getElementById('menuToggle');
             const mobileNav = document.getElementById('mobileNav');
             
             if (menuToggle && mobileNav) {
                 menuToggle.addEventListener('click', function() {
+                    console.log("Кнопка меню натиснута");
                     mobileNav.classList.toggle('active');
                     const spans = this.querySelectorAll('span');
                     
@@ -118,6 +120,8 @@
                         spans[2].style.transform = 'none';
                     }
                 });
+            } else {
+                console.error("Елементи меню не знайдені!");
             }
 
             // Закриваємо меню після кліку на пункт меню
@@ -148,11 +152,13 @@
         // Функція для завантаження збереженої теми
         function loadSavedTheme() {
             const savedTheme = localStorage.getItem('zypherionTheme') || 'blue';
+            console.log("Завантажена тема:", savedTheme);
             setActiveTheme(savedTheme);
         }
 
         // Функція для встановлення активної теми
         function setActiveTheme(themeName) {
+            console.log("Встановлення теми:", themeName);
             // Прибрати всі класи тем з body
             document.body.classList.remove('theme-blue', 'theme-purple', 'theme-turquoise');
             
