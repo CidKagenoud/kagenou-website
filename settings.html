@@ -857,143 +857,183 @@
     <!-- Модальне вікно для вибору теми -->
     <div class="theme-modal" id="themeModal">
         <div class="theme-modal-content">
-<!-- Завершення розмітки модального вікна -->
-<div class="theme-modal" id="themeModal">
-    <div class="theme-modal-content">
-        <div class="modal-header">
-            <h3 class="modal-title">Оберіть тему</h3>
-            <button class="close-modal" id="closeModal">&times;</button>
-        </div>
-        <div class="modal-body">
-            <p>Оберіть колірну схему для Zypherion:</p>
-            <div class="theme-options">
-                <div class="theme-option active" data-theme="theme-blue">
-                    <div class="theme-circle theme-blue"></div>
-                    <div class="theme-option-label">Синя</div>
-                </div>
-                <div class="theme-option" data-theme="theme-purple">
-                    <div class="theme-circle theme-purple"></div>
-                    <div class="theme-option-label">Фіолетова</div>
-                </div>
-                <div class="theme-option" data-theme="theme-red">
-                    <div class="theme-circle theme-red"></div>
-                    <div class="theme-option-label">Червона</div>
-                </div>
-                <div class="theme-option" data-theme="theme-green">
-                    <div class="theme-circle theme-green"></div>
-                    <div class="theme-option-label">Зелена</div>
-                </div>
-                <div class="theme-option" data-theme="theme-orange">
-                    <div class="theme-circle theme-orange"></div>
-                    <div class="theme-option-label">Оранжева</div>
+            <div class="modal-header">
+                <h3 class="modal-title">Оберіть тему</h3>
+                <button class="close-modal" id="closeThemeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Оберіть колірну схему для інтерфейсу Zypherion:</p>
+                <div class="theme-options">
+                    <div class="theme-option active" data-theme="default">
+                        <div class="theme-circle theme-blue"></div>
+                        <div class="theme-option-label">Синя</div>
+                    </div>
+                    <div class="theme-option" data-theme="theme-purple">
+                        <div class="theme-circle theme-purple"></div>
+                        <div class="theme-option-label">Фіолетова</div>
+                    </div>
+                    <div class="theme-option" data-theme="theme-red">
+                        <div class="theme-circle theme-red"></div>
+                        <div class="theme-option-label">Червона</div>
+                    </div>
+                    <div class="theme-option" data-theme="theme-green">
+                        <div class="theme-circle theme-green"></div>
+                        <div class="theme-option-label">Зелена</div>
+                    </div>
+                    <div class="theme-option" data-theme="theme-orange">
+                        <div class="theme-circle theme-orange"></div>
+                        <div class="theme-option-label">Оранжева</div>
+                    </div>
                 </div>
             </div>
+            <button class="save-button" id="applyTheme">Застосувати</button>
         </div>
     </div>
-</div>
-
-<!-- Повідомлення про успішне збереження -->
-<div class="save-message" id="saveMessage">
-    <span class="save-message-icon">✓</span>
-    <span>Налаштування збережено!</span>
-</div>
-
-<!-- JavaScript для роботи з темами -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Елементи DOM
+    
+    <!-- Повідомлення про успішне збереження -->
+    <div class="save-message" id="saveMessage">
+        <span class="save-message-icon">✓</span>
+        <span>Налаштування збережено!</span>
+    </div>
+    
+    <script>
+        // Функціональність для меню
         const menuToggle = document.getElementById('menuToggle');
         const mobileNav = document.getElementById('mobileNav');
-        const themeModal = document.getElementById('themeModal');
-        const openThemeModal = document.getElementById('openThemeModal');
-        const closeModal = document.getElementById('closeModal');
-        const saveButton = document.getElementById('saveSettings');
-        const saveMessage = document.getElementById('saveMessage');
-        const themeOptions = document.querySelectorAll('.theme-option');
         
-        // Завантаження збереженої теми
-        const savedTheme = localStorage.getItem('zypherionTheme') || 'theme-blue';
-        document.body.className = savedTheme;
-        updateActiveThemeSample(savedTheme);
-        
-        // Відкриття/закриття мобільного меню
-        menuToggle.addEventListener('click', function() {
-            menuToggle.classList.toggle('active');
+        menuToggle.addEventListener('click', () => {
             mobileNav.classList.toggle('active');
+            // Зміна вигляду іконки меню
+            const spans = menuToggle.querySelectorAll('span');
+            if (mobileNav.classList.contains('active')) {
+                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(7px, -7px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
         });
         
-        // Відкриття модального вікна вибору теми
+        // Функціональність для модального вікна теми
+        const themeModal = document.getElementById('themeModal');
+        const openThemeModal = document.getElementById('openThemeModal');
+        const closeThemeModal = document.getElementById('closeThemeModal');
+        const applyThemeBtn = document.getElementById('applyTheme');
+        const themeOptions = document.querySelectorAll('.theme-option');
+        let selectedTheme = 'default';
+        
+        // Відкриття модального вікна
         openThemeModal.addEventListener('click', function() {
             themeModal.classList.add('active');
         });
         
         // Закриття модального вікна
-        closeModal.addEventListener('click', function() {
+        closeThemeModal.addEventListener('click', function() {
             themeModal.classList.remove('active');
         });
         
-        // Закриття модального вікна при кліці поза його межами
-        themeModal.addEventListener('click', function(e) {
-            if (e.target === themeModal) {
+        // Закриття модального вікна при натисканні за його меж
+        window.addEventListener('click', function(event) {
+            if (event.target === themeModal) {
                 themeModal.classList.remove('active');
             }
         });
         
         // Вибір теми
         themeOptions.forEach(option => {
-            if (option.dataset.theme === savedTheme) {
-                option.classList.add('active');
-            }
-            
             option.addEventListener('click', function() {
-                const theme = this.dataset.theme;
-                
-                // Видаляємо активний клас у всіх опцій
                 themeOptions.forEach(opt => opt.classList.remove('active'));
-                
-                // Додаємо активний клас вибраній опції
                 this.classList.add('active');
-                
-                // Застосовуємо тему до body
-                document.body.className = theme;
-                
-                // Оновлюємо активний зразок теми
-                updateActiveThemeSample(theme);
+                selectedTheme = this.getAttribute('data-theme');
             });
         });
         
-        // Збереження налаштувань
-        saveButton.addEventListener('click', function() {
-            // Отримуємо активну тему
-            const activeTheme = document.querySelector('.theme-option.active').dataset.theme;
+        // Застосування теми
+        applyThemeBtn.addEventListener('click', function() {
+            document.body.className = '';
+            if (selectedTheme !== 'default') {
+                document.body.classList.add(selectedTheme);
+            }
             
-            // Зберігаємо в localStorage
-            localStorage.setItem('zypherionTheme', activeTheme);
+            // Оновлення зразка теми у налаштуваннях
+            document.getElementById('openThemeModal').className = 'theme-sample';
+            document.getElementById('openThemeModal').classList.add('active');
             
-            // Застосовуємо тему до body
-            document.body.className = activeTheme;
+            if (selectedTheme === 'default') {
+                document.getElementById('openThemeModal').classList.add('theme-blue');
+            } else if (selectedTheme === 'theme-purple') {
+                document.getElementById('openThemeModal').classList.add('theme-purple');
+            } else if (selectedTheme === 'theme-red') {
+                document.getElementById('openThemeModal').classList.add('theme-red');
+            } else if (selectedTheme === 'theme-green') {
+                document.getElementById('openThemeModal').classList.add('theme-green');
+            } else if (selectedTheme === 'theme-orange') {
+                document.getElementById('openThemeModal').classList.add('theme-orange');
+            }
             
-            // Закриваємо модальне вікно, якщо відкрите
             themeModal.classList.remove('active');
+            
+            // Зберігаємо вибір у локальному сховищі
+            localStorage.setItem('zypherionTheme', selectedTheme);
+        });
+        
+        // Кнопка збереження налаштувань
+        const saveBtn = document.getElementById('saveSettings');
+        const saveMessage = document.getElementById('saveMessage');
+        
+        saveBtn.addEventListener('click', function() {
+            // Анімація пульсації кнопки
+            this.style.animation = 'save-pulse 1s';
             
             // Показуємо повідомлення про успішне збереження
             saveMessage.classList.add('show');
             
-            // Анімація кнопки
-            saveButton.style.animation = 'save-pulse 1s';
-            
             // Через 3 секунди ховаємо повідомлення
-            setTimeout(function() {
+            setTimeout(() => {
                 saveMessage.classList.remove('show');
-                saveButton.style.animation = '';
             }, 3000);
+            
+            // Після завершення анімації видаляємо її
+            setTimeout(() => {
+                this.style.animation = '';
+            }, 1000);
         });
         
-        // Оновлення активного зразка теми
-        function updateActiveThemeSample(theme) {
-            const themeSample = document.getElementById('openThemeModal');
-            themeSample.className = 'theme-sample active';
-            themeSample.classList.add(theme);
-        }
-    });
-</script>
+        // Завантаження збереженої теми при завантаженні сторінки
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('zypherionTheme');
+            if (savedTheme) {
+                if (savedTheme !== 'default') {
+                    document.body.classList.add(savedTheme);
+                }
+                
+                // Оновлення активної опції в модальному вікні
+                themeOptions.forEach(option => {
+                    option.classList.remove('active');
+                    if (option.getAttribute('data-theme') === savedTheme) {
+                        option.classList.add('active');
+                    }
+                });
+                
+                // Оновлення зразка в налаштуваннях
+                document.getElementById('openThemeModal').className = 'theme-sample';
+                document.getElementById('openThemeModal').classList.add('active');
+                
+                if (savedTheme === 'default') {
+                    document.getElementById('openThemeModal').classList.add('theme-blue');
+                } else if (savedTheme === 'theme-purple') {
+                    document.getElementById('openThemeModal').classList.add('theme-purple');
+                } else if (savedTheme === 'theme-red') {
+                    document.getElementById('openThemeModal').classList.add('theme-red');
+                } else if (savedTheme === 'theme-green') {
+                    document.getElementById('openThemeModal').classList.add('theme-green');
+                } else if (savedTheme === 'theme-orange') {
+                    document.getElementById('openThemeModal').classList.add('theme-orange');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
