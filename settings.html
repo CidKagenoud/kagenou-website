@@ -408,15 +408,15 @@
         }
         
         /* Fixed theme previews - use static colors instead of CSS variables */
-        .theme-blue .theme-preview {
+        .theme-option.theme-blue .theme-preview {
             background: linear-gradient(135deg, #0d6efd, #83a4ff);
         }
         
-        .theme-purple .theme-preview {
+        .theme-option.theme-purple .theme-preview {
             background: linear-gradient(135deg, #8a2be2, #bf8fff);
         }
         
-        .theme-turquoise .theme-preview {
+        .theme-option.theme-turquoise .theme-preview {
             background: linear-gradient(135deg, #00CED1, #7FFFD4);
         }
         
@@ -453,15 +453,15 @@
         }
         
         /* Fixed theme text colors - use static colors */
-        .theme-blue .theme-info {
+        .theme-option.theme-blue .theme-info {
             color: #83a4ff;
         }
         
-        .theme-purple .theme-info {
+        .theme-option.theme-purple .theme-info {
             color: #bf8fff;
         }
         
-        .theme-turquoise .theme-info {
+        .theme-option.theme-turquoise .theme-info {
             color: #7FFFD4;
         }
         
@@ -756,7 +756,7 @@
         // Функція для встановлення активної теми
         function setActiveTheme(themeName) {
             // Прибрати всі класи тем з body
-            document.body.classList.remove('theme-purple', 'theme-turquoise');
+            document.body.classList.remove('theme-blue', 'theme-purple', 'theme-turquoise');
             
             // Прибрати active клас з усіх опцій тем
             document.querySelectorAll('.theme-option').forEach(option => {
@@ -772,6 +772,7 @@
                 document.getElementById('turquoiseTheme').classList.add('active');
             } else {
                 // За замовчуванням синя тема
+                document.body.classList.add('theme-blue');
                 document.getElementById('blueTheme').classList.add('active');
             }
             
