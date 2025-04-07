@@ -96,41 +96,76 @@
     </main>
 
     <script>
-        // JavaScript для мобільного меню
-        document.getElementById('menuToggle').addEventListener('click', function() {
-            document.getElementById('mobileNav').classList.toggle('active');
-            const spans = this.querySelectorAll('span');
-            
-            // Анімація іконки меню
-            if (document.getElementById('mobileNav').classList.contains('active')) {
-                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-                spans[1].style.opacity = '0';
-                spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
-            } else {
-                spans[0].style.transform = 'none';
-                spans[1].style.opacity = '1';
-                spans[2].style.transform = 'none';
-            }
-        });
+// JavaScript для мобільного меню
+document.getElementById('menuToggle').addEventListener('click', function() {
+    document.getElementById('mobileNav').classList.toggle('active');
+    const spans = this.querySelectorAll('span');
+    
+    // Анімація іконки меню
+    if (document.getElementById('mobileNav').classList.contains('active')) {
+        spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+        spans[1].style.opacity = '0';
+        spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+    } else {
+        spans[0].style.transform = 'none';
+        spans[1].style.opacity = '1';
+        spans[2].style.transform = 'none';
+    }
+});
 
-        // Закриваємо меню після кліку на пункт меню
-        document.querySelectorAll('nav a').forEach(item => {
-            item.addEventListener('click', function() {
-                document.getElementById('mobileNav').classList.remove('active');
-                const spans = document.getElementById('menuToggle').querySelectorAll('span');
-                spans[0].style.transform = 'none';
-                spans[1].style.opacity = '1';
-                spans[2].style.transform = 'none';
-            });
-        });
+// Закриваємо меню після кліку на пункт меню
+document.querySelectorAll('nav a').forEach(item => {
+    item.addEventListener('click', function() {
+        document.getElementById('mobileNav').classList.remove('active');
+        const spans = document.getElementById('menuToggle').querySelectorAll('span');
+        spans[0].style.transform = 'none';
+        spans[1].style.opacity = '1';
+        spans[2].style.transform = 'none';
+    });
+});
 
-        // Перевірка теми при завантаженні документа
-        document.addEventListener('DOMContentLoaded', function() {
-            const themeEnabled = localStorage.getItem('zypherionPurpleTheme') === 'true';
-            if (themeEnabled) {
-                document.body.classList.add('theme-purple');
-            }
-        });
-    </script>
-</body>
-</html>
+// Завантаження збереженої теми при завантаженні сторінки
+document.addEventListener('DOMContentLoaded', function() {
+    // Встановлюємо синю тему за замовчуванням, якщо тема не вибрана
+    if (!localStorage.getItem('zypherionTheme')) {
+        localStorage.setItem('zypherionTheme', 'blue');
+    }
+    
+    loadSavedTheme();
+});
+
+// Функція для завантаження збереженої теми
+function loadSavedTheme() {
+    const savedTheme = localStorage.getItem('zypherionTheme') || 'blue';
+    setActiveTheme(savedTheme);
+}
+
+// Функція для встановлення активної теми
+function setActiveTheme(themeName) {
+    // Прибрати всі класи тем з body
+    document.body.classList.remove('theme-blue', 'theme-purple', 'theme-turquoise');
+    
+    // Додати відповідний клас до body
+    if (themeName === 'purple') {
+        document.body.classList.add('theme-purple');
+    } else if (themeName === 'turquoise') {
+        document.body.classList.add('theme-turquoise');
+    } else {
+        // За замовчуванням синя тема
+        document.body.classList.add('theme-blue');
+    }
+    
+    // Переконатися, що логотип правильно оновився
+    updateLogoGradient();
+}
+
+// Функція для оновлення градієнта логотипу
+function updateLogoGradient() {
+    // Переконуємося, що градієнт логотипу оновлюється відразу
+    const logoText = document.querySelector('.logo-text');
+    if (logoText) {
+        logoText.style.animation = 'none';
+        logoText.offsetHeight; // Тригер reflow
+        logoText.style.animation = 'shimmer 4s linear infinite';
+    }
+}
