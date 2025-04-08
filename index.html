@@ -10,6 +10,76 @@
     <link rel="stylesheet" href="index.css">
     <!-- Подключаем шрифт Orbitron -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Додаткові стилі для мобільного меню */
+        #mobileNav {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 70%;
+            height: 100vh;
+            background-color: #0a0e17;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            transition: left 0.3s ease;
+            overflow-y: auto;
+            padding-top: 70px;
+        }
+
+        #mobileNav.active {
+            left: 0;
+        }
+
+        #mobileNav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #mobileNav .nav-container {
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        #mobileNav .nav-container a {
+            padding: 15px 10px;
+            color: white;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+
+        #mobileNav .nav-container a:hover,
+        #mobileNav .nav-container a.active {
+            background-color: rgba(13, 110, 253, 0.2);
+        }
+
+        /* Затемнення фону при відкритому меню */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* Забезпечення видимості іконки меню над оверлеєм */
+        .menu-toggle {
+            position: relative;
+            z-index: 1001;
+        }
+    </style>
 </head>
 <body>
     <!-- Добавляем плавающие пузырьки на фоне -->
@@ -18,6 +88,9 @@
     <div class="floating-blob blob-3"></div>
     <div class="floating-blob blob-4"></div>
     <div class="floating-blob blob-5"></div>
+    
+    <!-- Затемнення для фону при відкритому меню -->
+    <div class="overlay" id="overlay"></div>
     
     <header>
         <div class="logo">
@@ -106,11 +179,14 @@
             // Ініціалізація меню
             const menuToggle = document.getElementById('menuToggle');
             const mobileNav = document.getElementById('mobileNav');
+            const overlay = document.getElementById('overlay');
             
-            if (menuToggle && mobileNav) {
-                menuToggle.addEventListener('click', function() {
+            if (menuToggle && mobileNav && overlay) {
+                // Функція для відкриття/закриття меню
+                function toggleMenu() {
                     mobileNav.classList.toggle('active');
-                    const spans = this.querySelectorAll('span');
+                    overlay.classList.toggle('active');
+                    const spans = menuToggle.querySelectorAll('span');
                     
                     // Анімація іконки меню
                     if (mobileNav.classList.contains('active')) {
@@ -122,14 +198,21 @@
                         spans[1].style.opacity = '1';
                         spans[2].style.transform = 'none';
                     }
-                });
+                }
+                
+                // Додаємо обробник для кнопки меню
+                menuToggle.addEventListener('click', toggleMenu);
+                
+                // Додаємо обробник для затемнення фону (щоб закрити меню при кліку поза ним)
+                overlay.addEventListener('click', toggleMenu);
             }
 
             // Закриваємо меню після кліку на пункт меню
             document.querySelectorAll('nav a').forEach(item => {
                 item.addEventListener('click', function() {
-                    if (mobileNav) {
+                    if (mobileNav && mobileNav.classList.contains('active')) {
                         mobileNav.classList.remove('active');
+                        overlay.classList.remove('active');
                     }
                     
                     if (menuToggle) {
