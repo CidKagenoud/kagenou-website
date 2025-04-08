@@ -571,7 +571,7 @@ body.theme-turquoise .app-preview circle[stroke="#0d6efd"] {
     nav {
         position: fixed;
         top: 0;
-        right: -100%;
+        right: -100%; /* Начальное положение за экраном справа */
         width: 70%;
         height: 100vh;
         background-color: rgba(0, 0, 0, 0.95);
@@ -584,7 +584,40 @@ body.theme-turquoise .app-preview circle[stroke="#0d6efd"] {
     }
     
     nav.active {
-        right: 0;
+        right: 0; /* При активации меню появляется справа */
+    }
+    
+    /* Добавляем затемнение фона при открытом меню */
+    body::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 140;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    
+    body.menu-open::after {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    /* Анимация для кнопки меню */
+    .menu-toggle.active span:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+    }
+    
+    .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .menu-toggle.active span:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
     }
     
     nav ul {
@@ -599,19 +632,25 @@ body.theme-turquoise .app-preview circle[stroke="#0d6efd"] {
         background-color: transparent;
         box-shadow: none;
         width: 100%;
+        padding: 10px;
     }
     
     nav li {
-        width: 100%;
+        width: 80%; /* Уменьшаем ширину для лучшего вида */
         text-align: center;
     }
     
     nav a {
         font-size: 1.2rem;
         display: block;
-        padding: 10px 0;
+        padding: 12px 0;
         width: 100%;
         border-radius: 20px;
+        transition: all 0.3s ease;
+    }
+    
+    nav a:active {
+        transform: scale(0.95);
     }
     
     .main-content {
@@ -658,31 +697,5 @@ body.theme-turquoise .app-preview circle[stroke="#0d6efd"] {
     
     .scroll-indicator {
         bottom: 10px;
-    }
-}
-
-@media (max-width: 480px) {
-    h1 {
-        font-size: 2rem;
-    }
-    
-    p {
-        font-size: 1rem;
-    }
-    
-    .app-preview {
-        max-width: 100%;
-        width: 100%;
-        height: auto;
-        min-height: 250px;
-    }
-    
-    nav ul {
-        gap: 25px;
-        margin-top: 20px;
-    }
-    
-    .main-content {
-        margin-top: 40px;
     }
 }
