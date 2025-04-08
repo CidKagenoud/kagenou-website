@@ -552,63 +552,6 @@ body.theme-turquoise .app-preview circle[stroke="#0d6efd"] {
     stroke: #1abc9c;
 }
 
-/* Telegram Button Styles */
-.telegram-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px 16px;
-    background-color: #0088cc; /* Telegram blue */
-    color: white;
-    border-radius: 8px;
-    text-decoration: none;
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 500;
-    margin-top: 20px;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 10px rgba(0, 136, 204, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.telegram-button:hover {
-    background-color: #0099dd;
-    box-shadow: 0 0 15px rgba(0, 136, 204, 0.7);
-    transform: translateY(-2px);
-}
-
-.telegram-icon {
-    margin-right: 8px;
-}
-
-/* Theme compatibility for telegram button */
-body.theme-blue .telegram-button {
-    box-shadow: 0 0 10px rgba(0, 136, 204, 0.5);
-}
-
-body.theme-blue .telegram-button:hover {
-    box-shadow: 0 0 15px rgba(0, 136, 204, 0.7);
-}
-
-body.theme-purple .telegram-button {
-    background-color: #8e44ad;
-    box-shadow: 0 0 10px rgba(142, 68, 173, 0.5);
-}
-
-body.theme-purple .telegram-button:hover {
-    background-color: #9b59b6;
-    box-shadow: 0 0 15px rgba(142, 68, 173, 0.7);
-}
-
-body.theme-turquoise .telegram-button {
-    background-color: #16a085;
-    box-shadow: 0 0 10px rgba(22, 160, 133, 0.5);
-}
-
-body.theme-turquoise .telegram-button:hover {
-    background-color: #1abc9c;
-    box-shadow: 0 0 15px rgba(22, 160, 133, 0.7);
-}
-
 @media (max-width: 992px) {
     .main-content {
         padding: 0 20px;
@@ -715,17 +658,6 @@ body.theme-turquoise .telegram-button:hover {
     
     .scroll-indicator {
         bottom: 10px;
-    }
-    
-    /* Center the telegram button in mobile view */
-    .text-section .telegram-button {
-        margin: 20px auto;
-        display: flex;
-    }
-    
-    .telegram-button {
-        font-size: 14px;
-        padding: 6px 12px;
     }
 }
 
