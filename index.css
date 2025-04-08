@@ -197,7 +197,6 @@ header {
     }
 }
 
-/* Улучшенный стиль для кнопки меню */
 .menu-toggle {
     display: none;
     flex-direction: column;
@@ -206,7 +205,6 @@ header {
     height: 21px;
     cursor: pointer;
     z-index: 200;
-    position: relative;
 }
 
 .menu-toggle span {
@@ -560,12 +558,7 @@ body.theme-turquoise .app-preview circle[stroke="#0d6efd"] {
     }
 }
 
-/* Улучшенные стили мобильного меню */
 @media (max-width: 768px) {
-    body.menu-open {
-        overflow: hidden;
-    }
-    
     header {
         padding: 15px 20px;
         justify-content: space-between;
@@ -579,16 +572,15 @@ body.theme-turquoise .app-preview circle[stroke="#0d6efd"] {
         position: fixed;
         top: 0;
         right: -100%;
-        width: 100%;
+        width: 70%;
         height: 100vh;
         background-color: rgba(0, 0, 0, 0.95);
-        display: flex;
         flex-direction: column;
-        justify-content: center; /* Центрируем меню по вертикали */
+        justify-content: flex-start;
         align-items: center;
-        transition: all 0.4s ease;
+        transition: all 0.5s ease;
         z-index: 150;
-        padding-top: 0; /* Убираем верхний отступ */
+        padding-top: 80px;
     }
     
     nav.active {
@@ -598,28 +590,15 @@ body.theme-turquoise .app-preview circle[stroke="#0d6efd"] {
     nav ul {
         flex-direction: column;
         align-items: center;
-        gap: 30px;
-        width: 90%;
-        max-width: 300px;
-        padding: 0;
+        gap: 40px;
+        width: 100%;
     }
     
     .nav-container {
         flex-direction: column;
-        background-color: rgba(13, 110, 253, 0.1); /* Сохраняем фон */
-        border-radius: 15px;
-        padding: 20px;
-        width: 90%;
-        max-width: 300px;
-        box-shadow: 0 0 15px rgba(13, 110, 253, 0.2);
-    }
-    
-    body.theme-purple .nav-container {
-        background-color: rgba(155, 89, 182, 0.1);
-    }
-    
-    body.theme-turquoise .nav-container {
-        background-color: rgba(26, 188, 156, 0.1);
+        background-color: transparent;
+        box-shadow: none;
+        width: 100%;
     }
     
     nav li {
@@ -630,10 +609,9 @@ body.theme-turquoise .app-preview circle[stroke="#0d6efd"] {
     nav a {
         font-size: 1.2rem;
         display: block;
-        padding: 12px 0;
+        padding: 10px 0;
         width: 100%;
-        border-radius: 10px;
-        margin: 5px 0;
+        border-radius: 20px;
     }
     
     .main-content {
@@ -699,23 +677,9 @@ body.theme-turquoise .app-preview circle[stroke="#0d6efd"] {
         min-height: 250px;
     }
     
-    nav {
-        padding: 0;
-    }
-    
-    .nav-container {
-        width: 85%;
-        padding: 15px;
-    }
-    
-    nav a {
-        font-size: 1.1rem;
-        padding: 10px 0;
-    }
-    
     nav ul {
         gap: 25px;
-        margin-top: 0;
+        margin-top: 20px;
     }
     
     .main-content {
