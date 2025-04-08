@@ -103,47 +103,26 @@
     <script>
         // JavaScript для мобільного меню
         document.addEventListener('DOMContentLoaded', function() {
-            const menuToggle = document.querySelector('.menu-toggle');
-            const nav = document.querySelector('nav');
-            
-            menuToggle.addEventListener('click', function() {
-                nav.classList.toggle('active');
-                document.body.classList.toggle('menu-open');
-                
-                // Анимация превращения гамбургер-иконки в крестик
-                const spans = menuToggle.querySelectorAll('span');
-                if (nav.classList.contains('active')) {
-                    spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-                    spans[1].style.opacity = '0';
-                    spans[2].style.transform = 'rotate(-45deg) translate(7px, -8px)';
-                } else {
-                    spans[0].style.transform = 'none';
-                    spans[1].style.opacity = '1';
-                    spans[2].style.transform = 'none';
-                }
-            });
-            
-            // Закрытие меню при клике вне его области
-            document.addEventListener('click', function(e) {
-                if (nav.classList.contains('active') && 
-                    !nav.contains(e.target) && 
-                    !menuToggle.contains(e.target)) {
-                    nav.classList.remove('active');
-                    document.body.classList.remove('menu-open');
-                    
-                    // Возвращаем гамбургер-иконку в исходное состояние
-                    const spans = menuToggle.querySelectorAll('span');
-                    spans[0].style.transform = 'none';
-                    spans[1].style.opacity = '1';
-                    spans[2].style.transform = 'none';
-                }
-            });
-
-            // Ініціалізація меню (оригінальний код)
+            // Ініціалізація меню
+            const menuToggle = document.getElementById('menuToggle');
             const mobileNav = document.getElementById('mobileNav');
             
             if (menuToggle && mobileNav) {
-                // Примечание: мы уже добавили обработчик события выше
+                menuToggle.addEventListener('click', function() {
+                    mobileNav.classList.toggle('active');
+                    const spans = this.querySelectorAll('span');
+                    
+                    // Анімація іконки меню
+                    if (mobileNav.classList.contains('active')) {
+                        spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                        spans[1].style.opacity = '0';
+                        spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+                    } else {
+                        spans[0].style.transform = 'none';
+                        spans[1].style.opacity = '1';
+                        spans[2].style.transform = 'none';
+                    }
+                });
             }
 
             // Закриваємо меню після кліку на пункт меню
@@ -152,8 +131,6 @@
                     if (mobileNav) {
                         mobileNav.classList.remove('active');
                     }
-                    
-                    document.body.classList.remove('menu-open');
                     
                     if (menuToggle) {
                         const spans = menuToggle.querySelectorAll('span');
